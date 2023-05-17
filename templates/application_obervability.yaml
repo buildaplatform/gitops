@@ -23,6 +23,8 @@ spec:
     targetRevision: feat/add-observability
     ref: repo
   syncPolicy:
+    automated:
+      prune: true
     syncOptions:
     - CreateNamespace=true
     - ServerSideApply=true
