@@ -14,6 +14,14 @@ grafana:
       nginx.ingress.kubernetes.io/rewrite-target: /grafana/$2
     ingressClassName: nginx
     path: /grafana(/|$)(.*)
+  grafana.ini:
+    security:
+      cookie_secure: false
+    server:
+      domain: localhost
+      protocol: http
+      root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+      serve_from_sub_path: true
 
 prometheus:
   ingress:
