@@ -1,0 +1,3 @@
+# application specific
+ingress-nginx:
+  valuesFile: kind.values.yaml
