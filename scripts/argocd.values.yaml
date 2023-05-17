@@ -1,0 +1,30 @@
+redis-ha:
+  enabled: true
+
+controller:
+  replicas: 1
+
+server:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    paths:
+      - /argocd(/|$)(.*)
+  service:
+    servicePortHttp: 9090
+
+configs:
+  params:
+    "server.insecure": true
+    "server.rootpath": argocd
+
+repoServer:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+
+applicationSet:
+  replicaCount: 2
