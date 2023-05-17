@@ -1,0 +1,26 @@
+alertmanager:
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /alertmanager/$2
+    ingressClassName: nginx
+    paths:
+    - /alertmanager(/|$)(.*)
+
+grafana:
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /grafana/$2
+    ingressClassName: nginx
+    paths:
+    - /grafana(/|$)(.*)
+
+prometheus:
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /prometheus/$2
+    ingressClassName: nginx
+    paths:
+    - /prometheus(/|$)(.*)
