@@ -16,8 +16,8 @@ spec:
       targetRevision: 4.6.1
       helm:
         valueFiles:
-          - $values/ingress-nginx/kind.values.yaml
-    - repoURL: https://github.com/markandersontrocme/click-to-deploy/values
+          - $values/values/ingress-nginx/kind.values.yaml
+    - repoURL: https://github.com/markandersontrocme/click-to-deploy
       targetRevision: chore/init
       ref: values
   syncPolicy:
