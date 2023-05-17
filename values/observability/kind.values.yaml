@@ -13,8 +13,7 @@ grafana:
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /grafana/$2
     ingressClassName: nginx
-    paths:
-    - /grafana(/|$)(.*)
+    path: /grafana(/|$)(.*)
 
 prometheus:
   ingress:
