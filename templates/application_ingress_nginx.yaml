@@ -4,7 +4,7 @@ metadata:
   name: ingress-nginx
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   destination:
     namespace: ingress-nginx
@@ -16,9 +16,9 @@ spec:
       targetRevision: 4.6.1
       helm:
         valueFiles:
-          - $values/values/ingress-nginx/kind.values.yaml
+          - $values/values/ingress-nginx/{{ .Values.ingress-nignx.valuesFile }}
     - repoURL: https://github.com/markandersontrocme/click-to-deploy
-      targetRevision: chore/init
+      targetRevision: HEAD
       ref: values
   syncPolicy:
     automated:

@@ -8,6 +8,19 @@ Open source Heroku
 
 #### Required
 
-- [Docker](https://www.docker.com/)
-- [KinD](https://kind.sigs.k8s.io/docs/user/quick-start/#installing-with-a-package-manager)
-- [Github](https://www.gihub.com)
+- [Docker](https://www.docker.com)
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+- [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installing-with-a-package-manager)
+- [Helm](https://helm.sh/docs/intro/install)
+
+#### Make it run
+
+1. To start the cluster locally use:
+
+    ```bash
+    make bootstrap
+    ```
+
+    >A kind cluster will be created with argocd and ingress-nginx installed.
+
+1. One the pods are running you can visit: <http://localhost/argocd>
