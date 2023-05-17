@@ -16,7 +16,7 @@ spec:
     targetRevision: 4.6.1
     helm:
       valueFiles:
-        - $repo/values/ingress-nginx/{{ .Values.ingress-nignx.valuesFile }}
+      - $repo/values/ingress-nginx/{{ .Values.ingressnginx.valuesFile }}
   - repoURL: https://github.com/markandersontrocme/click-to-deploy
     targetRevision: feat/add-observability
     ref: repo

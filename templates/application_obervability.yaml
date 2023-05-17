@@ -1,10 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
   name: observability
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: monitoring
@@ -16,7 +18,7 @@ spec:
     targetRevision: 45.28.0
     helm:
       valueFiles:
-        - $repo/values/observability/{{ .Values.observability.valuesFile }}
+      - $repo/values/observability/{{ .Values.observability.valuesFile }}
   - repoURL: https://github.com/markandersontrocme/click-to-deploy
     targetRevision: feat/add-observability
     ref: repo
