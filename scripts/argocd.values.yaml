@@ -10,6 +10,8 @@ server:
     minReplicas: 2
   ingress:
     enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /argocd/$2
     ingressClassName: nginx
     paths:
       - /argocd(/|$)(.*)
@@ -19,7 +21,9 @@ server:
 configs:
   params:
     "server.insecure": true
-    "server.rootpath": argocd
+    "server.rootpath": /argocd
+    "server.basehref": /argocd
+    "server.disable.auth": true #only for KinD cluster locally
 
 repoServer:
   autoscaling:
