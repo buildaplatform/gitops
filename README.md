@@ -4,7 +4,7 @@ Open source Heroku
 
 ## Installation
 
-### Local
+### kind
 
 #### Required
 
@@ -18,7 +18,7 @@ Open source Heroku
 1. To start the cluster locally use:
 
     ```bash
-    make bootstrap
+    make bootstrap-kind
     ```
 
     >A kind cluster will be created with argocd and ingress-nginx installed.
