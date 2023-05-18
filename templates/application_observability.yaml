@@ -20,7 +20,7 @@ spec:
       valueFiles:
       - $repo/values/observability/{{ .Values.observability.valuesFile }}
   - repoURL: https://github.com/markandersontrocme/click-to-deploy
-    targetRevision: feat/add-observability
+    targetRevision: HEAD
     ref: repo
   syncPolicy:
     automated:
