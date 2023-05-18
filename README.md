@@ -25,7 +25,9 @@ Open source Heroku
 
 1. Visit the running applications:
 
-| Application | URL | Notes |
-|---|---|---|
-| ArgoCD | <http://localhost/argocd> |
-| Grafana | <http://localhost/grafana> | username:admin, password:prom-opertaor |
+    | Application | URL | Notes |
+    |---|---|---|
+    | ArgoCD | <http://localhost/argocd> |
+    | Grafana | <http://localhost/grafana> | username:admin, password:prom-opertaor |
+    | Prometheus | <http://localhost/prometheus> |
+    | Alertmanager | <http://localhost/alertmanager> |
