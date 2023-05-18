@@ -23,4 +23,11 @@ Open source Heroku
 
     >A kind cluster will be created with argocd and ingress-nginx installed.
 
-1. One the pods are running you can visit: <http://localhost/argocd>
+1. Visit the running applications:
+
+    | Application | URL | Notes |
+    |---|---|---|
+    | ArgoCD | <http://localhost/argocd> |
+    | Grafana | <http://localhost/grafana> | username:admin, password:prom-opertaor |
+    | Prometheus | <http://localhost/prometheus> |
+    | Alertmanager | <http://localhost/alertmanager> |

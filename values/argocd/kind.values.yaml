@@ -14,9 +14,7 @@ server:
       nginx.ingress.kubernetes.io/rewrite-target: /argocd/$2
     ingressClassName: nginx
     paths:
-      - /argocd(/|$)(.*)
-  service:
-    servicePortHttp: 9090
+    - /argocd(/|$)(.*)
 
 configs:
   params:
