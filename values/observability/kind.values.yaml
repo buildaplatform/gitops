@@ -34,4 +34,5 @@ prometheus:
     paths:
     - /prometheus(/|$)(.*)
   prometheusSpec:
+    externalUrl: "localhost/prometheus"
     routePrefix: /prometheus
