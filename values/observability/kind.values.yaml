@@ -6,6 +6,8 @@ alertmanager:
     ingressClassName: nginx
     paths:
     - /alertmanager(/|$)(.*)
+  alertmanagerSpec:
+    routePrefix: /alertmanager
 
 grafana:
   ingress:
@@ -31,3 +33,5 @@ prometheus:
     ingressClassName: nginx
     paths:
     - /prometheus(/|$)(.*)
+  prometheusSpec:
+    routePrefix: /prometheus
