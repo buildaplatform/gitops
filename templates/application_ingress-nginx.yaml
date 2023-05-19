@@ -18,7 +18,7 @@ spec:
       valueFiles:
       - $repo/values/ingress-nginx/{{ .Values.ingressnginx.valuesFile }}
   - repoURL: https://github.com/markandersontrocme/click-to-deploy
-    targetRevision: feat/enable-logging
+    targetRevision: HEAD
     ref: repo
   syncPolicy:
     automated:

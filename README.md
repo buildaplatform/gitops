@@ -1,12 +1,19 @@
 # Click to deploy
 
-Open source Heroku
+## What is included
 
-## Installation
+- [argocd](https://argo-cd.readthedocs.io/en/stable)
+- [ingress-nginx](https://kubernetes.github.io/ingress-nginx)
+- [kube-prometheus-stack](https://github.com/prometheus-operator/kube-prometheus)
+- [loki](https://grafana.com/oss/loki)
+- [tempo](https://grafana.com/oss/tempo)
+- [opentelemetry](https://opentelemetry.io/)
+
+## Getting Started
 
 ### Local
 
-#### Required
+#### Prerequisites
 
 - [Docker](https://www.docker.com)
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
@@ -21,7 +28,7 @@ Open source Heroku
     make bootstrap
     ```
 
-    >A kind cluster will be created with argocd and ingress-nginx installed.
+    >A kind cluster will be created with applications ready and running.
 
 1. Visit the running applications:
 
