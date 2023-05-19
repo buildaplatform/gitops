@@ -4,6 +4,8 @@ alertmanager:
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /alertmanager/$2
     ingressClassName: nginx
+    hosts:
+    - *
     paths:
     - /alertmanager(/|$)(.*)
   alertmanagerSpec:
@@ -15,6 +17,8 @@ grafana:
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /grafana/$2
     ingressClassName: nginx
+    hosts:
+    - *
     path: /grafana(/|$)(.*)
   grafana.ini:
     security:
@@ -31,6 +35,8 @@ prometheus:
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /prometheus/$2
     ingressClassName: nginx
+    hosts:
+    - *
     paths:
     - /prometheus(/|$)(.*)
   prometheusSpec:

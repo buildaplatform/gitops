@@ -5,3 +5,6 @@ ingressnginx:
 observability:
   enable: true
   valuesFile: kind.values.yaml
+
+logging:
+  enable: true
