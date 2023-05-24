@@ -1,0 +1,13 @@
+apiVersion: k3d.io/v1alpha3
+kind: Simple
+name: ctd
+agents: 3
+options:
+  k3d:
+    disableLoadbalancer: false # same as `--no-lb`
+  k3s: # options passed on to K3s itself
+    extraArgs: # additional arguments passed to the `k3s server|agent` command; same as `--k3s-arg`
+      - arg: --disable=traefik@server:*
+  kubeconfig:
+    updateDefaultKubeconfig: true # add new cluster to your default Kubeconfig; same as `--kubeconfig-update-default` (default: true)
+    switchCurrentContext: true # also set current-context to the new cluster's context; same as `--kubeconfig-switch-context` (default: true)

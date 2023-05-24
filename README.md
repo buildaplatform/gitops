@@ -11,6 +11,48 @@
 
 ## Getting Started
 
+### Help
+
+To know what commands you can run use:
+
+```bash
+make help
+```
+
+### k3d
+
+#### Prerequisites
+
+- [Docker](https://www.docker.com)
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+- [k3d](https://k3d.io/)
+- [Helm](https://helm.sh/docs/intro/install)
+
+#### Make it run
+
+1. To start the cluster locally use:
+
+    ```bash
+    make bootstrap-k3d
+    ```
+
+    >A k3d cluster will be created with applications ready and running.
+
+1. Visit the running applications:
+
+    | Application | URL | Notes |
+    |---|---|---|
+    | ArgoCD | <http://localhost/argocd> |
+    | Grafana | <http://localhost/grafana> | username:admin, password:prom-opertaor |
+    | Prometheus | <http://localhost/prometheus> |
+    | Alertmanager | <http://localhost/alertmanager> |
+
+1. To stop the cluster:
+
+    ```bash
+    make destroy-k3d
+    ```
+
 ### kind
 
 #### Prerequisites
@@ -38,3 +80,9 @@
     | Grafana | <http://localhost/grafana> | username:admin, password:prom-opertaor |
     | Prometheus | <http://localhost/prometheus> |
     | Alertmanager | <http://localhost/alertmanager> |
+
+1. To stop the cluster:
+
+    ```bash
+    make destroy-kind
+    ```

@@ -1,11 +1,4 @@
-KIND_CLUSTER ?= ctd
-KIND_CONFIG_FILE ?= kind-config.yaml
-
-bootstrap-kind: ## bootstrap an opinionated kind cluster
-	@./scripts/bootstrap.sh kind-start
-
-bootstrap-k3d: ## bootstrap an opinionated k3d cluster
-	@./scripts/bootstrap.sh k3d-start
+CLUSTER ?= ctd
 
 .PHONY: argocd
 argocd: ## deploy argocd with helm
@@ -15,20 +8,26 @@ argocd: ## deploy argocd with helm
 ## kind
 ## --------------------------------------
 
-kind-start: ## setup kind cluster
-	@KIND_CLUSTER="${KIND_CLUSTER}" KIND_CONFIG_FILE=${KIND_CONFIG_FILE} ./scripts/kind_setup.sh
+bootstrap-kind: ## bootstrap an opinionated kind cluster
+	@./scripts/bootstrap.sh start-kind
 
-kind-destroy: ## destroy kind cluster
+start-kind: ## setup kind cluster
+	@CLUSTER="${CLUSTER}" ./scripts/setup_kind.sh
+
+destroy-kind: ## destroy kind cluster
 	@kind delete cluster --name "${KIND_CLUSTER}"
 
 ## --------------------------------------
 ## k3d
 ## --------------------------------------
 
-k3d-start: ## setup k3d cluster
-	@k3d cluster create ctd --agents 3 --k3s-arg "--disable=traefik@server:*"
+bootstrap-k3d: ## bootstrap an opinionated k3d cluster
+	@./scripts/bootstrap.sh start-k3d
 
-k3d-destroy: ## destroy k3d cluster
+start-k3d: ## setup k3d cluster
+	@CLUSTER="${CLUSTER}" ./scripts/setup_k3d.sh
+
+destroy-k3d: ## destroy k3d cluster
 	@k3d cluster delete ctd
 
 ## --------------------------------------

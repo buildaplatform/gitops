@@ -21,7 +21,7 @@ configs:
     "server.insecure": true
     "server.rootpath": /argocd
     "server.basehref": /argocd
-    "server.disable.auth": true #only for kind cluster locally
+    "server.disable.auth": true #only for k3d cluster locally
 
 repoServer:
   autoscaling:

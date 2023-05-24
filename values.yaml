@@ -1,10 +1,10 @@
 # application specific
 ingressnginx:
-  valuesFile: kind.values.yaml
+  valuesFile: k3d.values.yaml
 
 observability:
   enable: true
-  valuesFile: kind.values.yaml
+  valuesFile: k3d.values.yaml
 
 logging:
   enable: true
