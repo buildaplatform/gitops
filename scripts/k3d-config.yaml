@@ -1,13 +1,21 @@
-apiVersion: k3d.io/v1alpha3
+apiVersion: k3d.io/v1alpha5
 kind: Simple
-name: ctd
+metadata:
+  name: ctd
+servers: 1
 agents: 3
+image: docker.io/rancher/k3s:v1.26.4-k3s1
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
 options:
-  k3d:
-    disableLoadbalancer: false # same as `--no-lb`
-  k3s: # options passed on to K3s itself
-    extraArgs: # additional arguments passed to the `k3s server|agent` command; same as `--k3s-arg`
-      - arg: --disable=traefik@server:*
-  kubeconfig:
-    updateDefaultKubeconfig: true # add new cluster to your default Kubeconfig; same as `--kubeconfig-update-default` (default: true)
-    switchCurrentContext: true # also set current-context to the new cluster's context; same as `--kubeconfig-switch-context` (default: true)
+  k3s:
+    extraArgs:
+      - arg: --disable=traefik
+        nodeFilters:
+          - server:*
+    nodeLabels:
+      - label: ingress-ready=true
+        nodeFilters:
+          - agent:1

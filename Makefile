@@ -2,20 +2,7 @@ CLUSTER ?= ctd
 
 .PHONY: argocd
 argocd: ## deploy argocd with helm
-	@helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values ./values/argocd/kind.values.yaml > /dev/null
-
-## --------------------------------------
-## kind
-## --------------------------------------
-
-bootstrap-kind: ## bootstrap an opinionated kind cluster
-	@./scripts/bootstrap.sh start-kind
-
-start-kind: ## setup kind cluster
-	@CLUSTER="${CLUSTER}" ./scripts/setup_kind.sh
-
-destroy-kind: ## destroy kind cluster
-	@kind delete cluster --name "${KIND_CLUSTER}"
+	@helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values ./scripts/values.argocd.yaml > /dev/null
 
 ## --------------------------------------
 ## k3d
@@ -29,6 +16,19 @@ start-k3d: ## setup k3d cluster
 
 destroy-k3d: ## destroy k3d cluster
 	@k3d cluster delete ctd
+
+## --------------------------------------
+## kind
+## --------------------------------------
+
+bootstrap-kind: ## bootstrap an opinionated kind cluster
+	@./scripts/bootstrap.sh start-kind
+
+start-kind: ## setup kind cluster
+	@CLUSTER="${CLUSTER}" ./scripts/setup_kind.sh
+
+destroy-kind: ## destroy kind cluster
+	@kind delete cluster --name "${KIND_CLUSTER}"
 
 ## --------------------------------------
 ## tooling

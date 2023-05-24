@@ -10,16 +10,13 @@ spec:
     namespace: ingress-nginx
     server: https://kubernetes.default.svc
   project: default
-  sources:
-  - repoURL: https://kubernetes.github.io/ingress-nginx
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
     chart: ingress-nginx
     targetRevision: 4.6.1
     helm:
-      valueFiles:
-      - $repo/values/ingress-nginx/{{ .Values.ingressnginx.valuesFile }}
-  - repoURL: https://github.com/markandersontrocme/click-to-deploy
-    targetRevision: HEAD
-    ref: repo
+      values: |
+        {{- .Values.ingressnginx | toYaml | nindent 8 }}
   syncPolicy:
     automated:
       prune: true

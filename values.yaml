@@ -1,10 +1,80 @@
+domain: localhost
+
 # application specific
 ingressnginx:
-  valuesFile: k3d.values.yaml
+  controller:
+    kind: DaemonSet
+    hostNetwork: true
+    hostPort:
+      enable: true
+    service:
+      enabled: false
+    publishService:
+      enabled: false
+    config:
+      use-forwarded-headers: "true"
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+    nodeSelector:
+      ingress-ready: "true"
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/master
+      operator: Equal
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/control-plane
+      operator: Equal
 
 observability:
   enable: true
-  valuesFile: k3d.values.yaml
+  alertmanager:
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /alertmanager/$2
+      ingressClassName: nginx
+      paths:
+      - /alertmanager(/|$)(.*)
+    alertmanagerSpec:
+      routePrefix: /alertmanager
+
+  grafana:
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /grafana/$2
+      ingressClassName: nginx
+      path: /grafana(/|$)(.*)
+    grafana.ini:
+      security:
+        cookie_secure: false
+      server:
+        domain: localhost
+        protocol: http
+        root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+        serve_from_sub_path: true
+    additionalDataSources:
+    - name: loki
+      type: loki
+      url: http://loki.observability.svc.cluster.local:3100
+    - name: tempo
+      type: tempo
+      url: http://tempo.observability.svc.cluster.local:3100
+
+  prometheus:
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /prometheus/$2
+      ingressClassName: nginx
+      paths:
+      - /prometheus(/|$)(.*)
+    prometheusSpec:
+      externalUrl: /prometheus
+      routePrefix: /prometheus
+
 
 logging:
   enable: true

@@ -9,19 +9,19 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: observability
   project: default
   source:
     repoURL: 'https://grafana.github.io/helm-charts'
-    targetRevision: 2.9.10
     chart: loki-stack
+    targetRevision: 2.9.10
     helm:
       releaseName: loki
       parameters:
       - name: grafana.sidecar.datasources.enabled
         value: "false"
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: observability
   syncPolicy:
     automated:
       selfHeal: true
