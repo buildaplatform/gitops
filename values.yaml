@@ -13,10 +13,6 @@ ingressnginx:
       enabled: false
     config:
       use-forwarded-headers: "true"
-    metrics:
-      enabled: false
-      serviceMonitor:
-        enabled: false
     nodeSelector:
       ingress-ready: "true"
     tolerations:
