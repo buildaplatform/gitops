@@ -1,0 +1,21 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: ctd
+servers: 1
+agents: 3
+image: docker.io/rancher/k3s:v1.26.4-k3s1
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+options:
+  k3s:
+    extraArgs:
+      - arg: --disable=traefik
+        nodeFilters:
+          - server:*
+    nodeLabels:
+      - label: ingress-ready=true
+        nodeFilters:
+          - agent:1

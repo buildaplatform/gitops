@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-make kind-start
+make ${1}
 make argocd
 "${DIR}"/wait_for_deployment.sh argocd-server argocd
 kubectl apply -f bootstrap.yaml
