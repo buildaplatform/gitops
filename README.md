@@ -27,6 +27,7 @@ make help
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - [k3d](https://k3d.io/)
 - [Helm](https://helm.sh/docs/intro/install)
+- [jq](https://stedolan.github.io/jq/download/)
 
 #### Make it run
 
@@ -61,6 +62,7 @@ make help
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installing-with-a-package-manager)
 - [Helm](https://helm.sh/docs/intro/install)
+- [jq](https://stedolan.github.io/jq/download/)
 
 #### Make it run
 

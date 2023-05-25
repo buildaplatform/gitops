@@ -3,7 +3,7 @@ domain: localhost
 # application specific
 ingressnginx:
   controller:
-    kind: DaemonSet
+    kind: Deployment
     hostNetwork: true
     hostPort:
       enable: true
@@ -70,7 +70,16 @@ observability:
     prometheusSpec:
       externalUrl: /prometheus
       routePrefix: /prometheus
-
+      serviceMonitorSelectorNilUsesHelmValues: false
+      retention: 5d
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: local-path
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 10Gi
 
 logging:
   enable: true
