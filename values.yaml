@@ -89,5 +89,4 @@ cloudflared:
   ingress:
   - hostname: "*.buildaplatform.io"
     service: http://ingress-nginx-controller-admission.ingress-nginx.svc.cluster.local:443
-  - hostname: "*"
-    service: http://ingress-nginx-controller-admission.ingress-nginx.svc.cluster.local:443
+  - service: http://ingress-nginx-controller-admission.ingress-nginx.svc.cluster.local:443
