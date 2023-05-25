@@ -85,10 +85,7 @@ logging:
 cloudflared:
   enable: true
   tunnelID: "82cbda74-e016-4326-a4fb-35cfb39bd955"
-  auth:
-    accountTag: "9b757b66db527596fb3eb1794e869276"
-    tunnelName: "k3d-ctd"
-    tunnelSecret: "YWliRDRCNW5Qa21jbjM2RTNvUXVVQzZsWGFMazNzSFc="
+  existingSecret: "tunnel-credentials"
   ingress:
   - hostname: "*.buildaplatform.io"
     service: http://ingress-nginx-controller-admission.ingress-nginx.svc.cluster.local:443

@@ -18,9 +18,9 @@ resource "kubernetes_secret" "this" {
   }
 
   data = {
-    AccountTag   = var.account_name
-    TunnelID     = cloudflare_record.this.id
-    TunnelName   = cloudflare_tunnel.this.name
-    TunnelSecret = var.tunnel_secret
+    AccountTag   = base64encode(var.account_name)
+    TunnelID     = base64encode(cloudflare_record.this.id)
+    TunnelName   = base64encode(cloudflare_tunnel.this.name)
+    TunnelSecret = base64encode(var.tunnel_secret)
   }
 }
