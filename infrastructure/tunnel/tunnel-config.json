@@ -1,0 +1,6 @@
+{
+  "AccountTag": "${ACCOUNT_NAME}",
+  "TunnelID": "${TUNNEL_ID}",
+  "TunnelName": "${TUNNEL_NAME}",
+  "TunnelSecret": "${TUNNEL_SECRET}"
+}
