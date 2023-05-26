@@ -1,7 +1,7 @@
 apiVersion: k3d.io/v1alpha5
 kind: Simple
 metadata:
-  name: ctd
+  name: laptop
 servers: 1
 agents: 3
 image: docker.io/rancher/k3s:v1.26.4-k3s1
