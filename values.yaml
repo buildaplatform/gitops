@@ -2,16 +2,11 @@
 ingressnginx:
   controller:
     kind: Deployment
-    hostNetwork: true
-    hostPort:
-      enable: true
-    service:
-      type: NodePort
-      nodePorts:
-        http: 30080
-        https: 30443
-    config:
-      use-forwarded-headers: "true"
+    # hostNetwork: true
+    # hostPort:
+    #   enable: true
+    # config:
+    #   use-forwarded-headers: "true"
     nodeSelector:
       ingress-ready: "true"
     tolerations:
@@ -85,8 +80,6 @@ logging:
 
 cloudflared:
   enable: true
-  image:
-    tag: 2023.5.0
   tunnelID: "82cbda74-e016-4326-a4fb-35cfb39bd955"
   existingSecret: "tunnel-credentials"
   ingress:
