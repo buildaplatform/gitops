@@ -29,3 +29,23 @@ resource "helm_release" "cloudflared" {
     HOSTNAME      = cloudflare_record.this.hostname
   })]
 }
+
+resource "cloudflare_access_application" "this" {
+  zone_id          = var.zone_id
+  name             = var.name
+  domain           = cloudflare_record.this.hostname
+  type             = "self_hosted"
+  session_duration = "24h"
+}
+
+resource "cloudflare_access_policy" "this" {
+  application_id = cloudflare_access_application.this.id
+  zone_id        = var.zone_id
+  name           = var.name
+  precedence     = "1"
+  decision       = "allow"
+
+  include {
+    email = var.allowed_emails
+  }
+}
