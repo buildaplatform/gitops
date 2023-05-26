@@ -1,85 +1,27 @@
-domain: localhost
-
 # application specific
-ingressnginx:
-  controller:
-    kind: Deployment
-    hostNetwork: true
-    hostPort:
-      enable: true
-    service:
-      enabled: false
-    publishService:
-      enabled: false
-    config:
-      use-forwarded-headers: "true"
-    nodeSelector:
-      ingress-ready: "true"
-    tolerations:
-    - effect: NoSchedule
-      key: node-role.kubernetes.io/master
-      operator: Equal
-    - effect: NoSchedule
-      key: node-role.kubernetes.io/control-plane
-      operator: Equal
-
 observability:
   enable: true
   alertmanager:
     ingress:
-      enabled: true
-      annotations:
-        nginx.ingress.kubernetes.io/rewrite-target: /alertmanager/$2
-      ingressClassName: nginx
-      paths:
-      - /alertmanager(/|$)(.*)
-    alertmanagerSpec:
-      routePrefix: /alertmanager
-
+      enable: true
   grafana:
     ingress:
-      enabled: true
-      annotations:
-        nginx.ingress.kubernetes.io/rewrite-target: /grafana/$2
-      ingressClassName: nginx
-      path: /grafana(/|$)(.*)
-    grafana.ini:
-      security:
-        cookie_secure: false
-      server:
-        domain: localhost
-        protocol: http
-        root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
-        serve_from_sub_path: true
-    additionalDataSources:
-    - name: loki
-      type: loki
-      url: http://loki.observability.svc.cluster.local:3100
-    - name: tempo
-      type: tempo
-      url: http://tempo.observability.svc.cluster.local:3100
-
+      enable: true
   prometheus:
     ingress:
-      enabled: true
-      annotations:
-        nginx.ingress.kubernetes.io/rewrite-target: /prometheus/$2
-      ingressClassName: nginx
-      paths:
-      - /prometheus(/|$)(.*)
-    prometheusSpec:
-      externalUrl: /prometheus
-      routePrefix: /prometheus
-      serviceMonitorSelectorNilUsesHelmValues: false
-      retention: 5d
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: local-path
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 10Gi
+      enable: true
+    retention: 5d
+    storage:
+      class: local-path
+      size: 10Gi
 
 logging:
   enable: true
+
+cloudflared:
+  enable: true
+  image:
+    tag: 2023.5.1
+  tunnelID: "5e9a1f62-b5d4-440a-8265-a8d41c755202"
+  ingress:
+  - hostname: "k3d-laptop.buildaplatform.io"
