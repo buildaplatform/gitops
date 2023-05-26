@@ -31,7 +31,7 @@ Download these tools:
 - [Helm](https://helm.sh/docs/intro/install)
 - [jq](https://stedolan.github.io/jq/download/)
 
-You may need to also install:
+You may need to also download:
 
 - [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
