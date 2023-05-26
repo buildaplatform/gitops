@@ -9,6 +9,7 @@ resource "cloudflare_record" "this" {
   name    = var.name
   value   = "${cloudflare_tunnel.this.id}.cfargotunnel.com"
   type    = "CNAME"
+  proxied = true
 }
 
 resource "kubernetes_secret" "this" {
