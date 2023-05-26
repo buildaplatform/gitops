@@ -2,8 +2,9 @@
 ingressnginx:
   controller:
     kind: Deployment
-    targetPorts:
-      https: http
+    service:
+      targetPorts:
+        https: http
     nodeSelector:
       ingress-ready: "true"
     tolerations:
