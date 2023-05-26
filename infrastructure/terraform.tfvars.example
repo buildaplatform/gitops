@@ -1,7 +1,5 @@
-#head /dev/urandom | LC_ALL=C tr -dc A-Za-z0-9 | head -c32 | base64
-
 # cloudflare
 cloudflare_account_name = ""
 cloudflare_domain       = ""
-tunnel_secret           = ""
+tunnel_secret           = "" #head /dev/urandom | LC_ALL=C tr -dc A-Za-z0-9 | head -c32 | base64
 cloudflare_api_token    = ""
