@@ -1,5 +1,5 @@
 CLUSTER ?= laptop
-CLOUDFLARE ?= false # if true it configures cloudflare with records and tunnels
+CLOUDFLARE ?= false # if true it manages cloudflare resources
 
 .PHONY: argocd
 argocd: ## deploy argocd with helm
@@ -23,6 +23,9 @@ start-k3d: ## setup k3d cluster
 
 destroy-k3d: ## destroy k3d cluster
 	@k3d cluster delete "${CLUSTER}"
+	@if [[ ${CLOUDFLARE} == "true" ]]; then\
+		echo "$$(make tf-destroy)";\
+	fi
 
 ## --------------------------------------
 ## terraform
@@ -36,6 +39,9 @@ tf-plan: tf-init ## plan terraform resources
 
 tf-apply: tf-init ## apply terraform resources
 	@terraform -chdir=infrastructure apply -var-file terraform.tfvars -auto-approve
+
+tf-destroy: tf-init ## destroy terraform resources
+	@terraform -chdir=infrastructure apply -destroy -var-file terraform.tfvars -auto-approve
 
 ## --------------------------------------
 ## tooling
