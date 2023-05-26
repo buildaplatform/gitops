@@ -5,8 +5,8 @@ terraform {
       version = "~> 4"
     }
 
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
+    helm = {
+      source  = "hashicorp/helm"
       version = "~> 2"
     }
   }

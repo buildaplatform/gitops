@@ -23,3 +23,9 @@ variable "tunnel_secret" {
   type        = string
   sensitive   = true
 }
+
+variable "allowed_emails" {
+  description = "Allowed emails to access application"
+  type        = list(string)
+  default     = []
+}

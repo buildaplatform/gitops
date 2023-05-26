@@ -7,8 +7,6 @@ make argocd
 "${DIR}"/wait_for_deployment.sh argocd-server argocd
 kubectl apply -f bootstrap.yaml
 "${DIR}"/wait_for_deployment.sh ingress-nginx-controller ingress-nginx
-"${DIR}"/wait_for_namespace.sh networking
-make tf-apply
 
 echo ""
 echo "Argo CD"
@@ -21,3 +19,7 @@ echo "Grafana"
 echo "    Visit http://localhost/grafana 📈"
 make grafana-credentials
 echo ""
+
+if [[ ${CLOUDFLARE} == "true" ]]; then
+  make tf-apply
+fi

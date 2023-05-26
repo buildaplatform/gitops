@@ -1,0 +1,11 @@
+image:
+  tag: 2023.5.1
+tunnelID: "${TUNNEL_ID}"
+auth:
+  accountTag: "${ACCOUNT_TAG}"
+  tunnelName: "${TUNNEL_NAME}"
+  tunnelSecret: "${TUNNEL_SECRET}"
+ingress:
+- hostname: "${HOSTNAME}"
+  service: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"
+- service: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"
