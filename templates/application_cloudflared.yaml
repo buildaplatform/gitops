@@ -18,13 +18,13 @@ spec:
       values: |
         image:
           tag: {{ .Values.cloudflared.image.tag }}
-        tunnelID: {{ .Values.cloudflared.tunnelID }}
+        tunnelID: {{ .Values.cloudflared.tunnelID | quote }}
         ingress:
         {{- range $ingress := .Values.cloudflared.ingress }}
-        - name: {{ $ingress.hostname }}
-          service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443
+        - name: {{ $ingress.hostname | quote }}
+          service: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"
         {{- end }}
-        - service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443
+        - service: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"
   syncPolicy:
     automated:
       prune: true
