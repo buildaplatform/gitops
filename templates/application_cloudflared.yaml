@@ -19,6 +19,7 @@ spec:
         image:
           tag: {{ .Values.cloudflared.image.tag }}
         tunnelID: {{ .Values.cloudflared.tunnelID | quote }}
+        existingSecret: "tunnel-credentials"
         ingress:
         {{- range $ingress := .Values.cloudflared.ingress }}
         - name: {{ $ingress.hostname | quote }}
