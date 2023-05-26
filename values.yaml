@@ -5,10 +5,6 @@ ingressnginx:
     hostNetwork: true
     hostPort:
       enable: true
-    service:
-      enabled: false
-    publishService:
-      enabled: false
     config:
       use-forwarded-headers: "true"
     nodeSelector:
@@ -84,9 +80,11 @@ logging:
 
 cloudflared:
   enable: true
+  image:
+    tag: 2023.5.1
   tunnelID: "82cbda74-e016-4326-a4fb-35cfb39bd955"
   existingSecret: "tunnel-credentials"
   ingress:
-  - hostname: "*.buildaplatform.io"
+  - hostname: "k3d-ctd.buildaplatform.io"
     service: http://ingress-nginx-controller-admission.ingress-nginx.svc.cluster.local:443
   - service: http://ingress-nginx-controller-admission.ingress-nginx.svc.cluster.local:443

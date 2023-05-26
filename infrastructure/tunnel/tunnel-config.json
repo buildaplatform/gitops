@@ -1,5 +1,5 @@
 {
-  "AccountTag": "${ACCOUNT_NAME}",
+  "AccountTag": "${ACCOUNT_TAG}",
   "TunnelID": "${TUNNEL_ID}",
   "TunnelName": "${TUNNEL_NAME}",
   "TunnelSecret": "${TUNNEL_SECRET}"
