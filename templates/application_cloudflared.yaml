@@ -17,12 +17,12 @@ spec:
     helm:
       values: |
         image:
-          tag: {{- .Values.cloudflared.image.tag }}
-        tunnelID: {{- .Values.cloudflared.tunnelID | quote }}
+          tag: {{ .Values.cloudflared.image.tag }}
+        tunnelID: {{ .Values.cloudflared.tunnelID | quote }}
         existingSecret: "tunnel-credentials"
         ingress:
         {{- range $ingress := .Values.cloudflared.ingress }}
-        - name: {{- $ingress.hostname | quote }}
+        - hostname: {{ $ingress.hostname | quote }}
           service: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"
         {{- end }}
         - service: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"
