@@ -6,7 +6,7 @@ ingressnginx:
     hostPort:
       enable: true
     service:
-      type: ClusterIP
+      type: NodePort
     config:
       use-forwarded-headers: "true"
     nodeSelector:
