@@ -86,5 +86,5 @@ cloudflared:
   existingSecret: "tunnel-credentials"
   ingress:
   - hostname: "k3d-ctd.buildaplatform.io"
-    service: http://ingress-nginx-controller-admission.ingress-nginx.svc.cluster.local:443
-  - service: http://ingress-nginx-controller-admission.ingress-nginx.svc.cluster.local:443
+    service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:32590
+  - service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:32590
