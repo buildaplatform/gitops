@@ -21,7 +21,6 @@ configs:
     "server.insecure": true
     "server.rootpath": /argocd
     "server.basehref": /argocd
-    "server.disable.auth": true #only for local cluster
 
 repoServer:
   autoscaling:

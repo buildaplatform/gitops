@@ -9,5 +9,15 @@ kubectl apply -f bootstrap.yaml
 "${DIR}"/wait_for_deployment.sh ingress-nginx-controller ingress-nginx
 
 echo ""
-echo "Visit http://localhost/argocd 🤟"
+echo "Argo CD"
+echo "    Visit http://localhost/argocd 🐙"
+make argocd-password
 echo ""
+
+echo ""
+echo "Grafana"
+echo "    Visit http://localhost/grafana 📈"
+echo "    Username: admin"
+echo "    Password: prom-operator"
+echo ""
+

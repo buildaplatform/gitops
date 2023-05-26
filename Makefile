@@ -4,6 +4,9 @@ CLUSTER ?= laptop
 argocd: ## deploy argocd with helm
 	@helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values ./scripts/values.argocd.yaml > /dev/null
 
+argocd-password: ## print the argocd admin password
+	@echo "    Username: admin\n    Password: $$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)"
+
 ## --------------------------------------
 ## k3d
 ## --------------------------------------
