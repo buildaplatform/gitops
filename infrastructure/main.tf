@@ -14,6 +14,5 @@ module "tunnel" {
   zone_id      = data.cloudflare_zone.this.id
 
   name          = "k3d-laptop"
-  subdomain     = "homelab"
   tunnel_secret = var.tunnel_secret
 }

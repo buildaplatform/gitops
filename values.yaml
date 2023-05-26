@@ -24,4 +24,4 @@ cloudflared:
     tag: 2023.5.1
   tunnelID: "69c38170-0ed1-42ea-b184-05cd40dced9c"
   ingress:
-  - hostname: "k3d-laptop.homelab.buildaplatform.io"
+  - hostname: "k3d-laptop.buildaplatform.io"

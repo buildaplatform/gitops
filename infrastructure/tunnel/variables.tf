@@ -18,11 +18,6 @@ variable "name" {
   type        = string
 }
 
-variable "subdomain" {
-  description = "The subdomain"
-  type        = string
-}
-
 variable "tunnel_secret" {
   description = "Cloudflare Tunnel password"
   type        = string
