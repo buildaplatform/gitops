@@ -34,19 +34,6 @@ tf-apply: ## apply terraform resources
 	@terraform -chdir=infrastructure apply -var-file terraform.tfvars -auto-approve
 
 ## --------------------------------------
-## kind
-## --------------------------------------
-
-bootstrap-kind: ## bootstrap an opinionated kind cluster
-	@./scripts/bootstrap.sh start-kind
-
-start-kind: ## setup kind cluster
-	@CLUSTER="${CLUSTER}" ./scripts/setup_kind.sh
-
-destroy-kind: ## destroy kind cluster
-	@kind delete cluster --name "${CLUSTER}"
-
-## --------------------------------------
 ## tooling
 ## --------------------------------------
 
