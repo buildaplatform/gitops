@@ -53,38 +53,3 @@ make help
     ```bash
     make destroy-k3d
     ```
-
-### kind
-
-#### Prerequisites
-
-- [Docker](https://www.docker.com)
-- [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
-- [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installing-with-a-package-manager)
-- [Helm](https://helm.sh/docs/intro/install)
-- [jq](https://stedolan.github.io/jq/download/)
-
-#### Make it run
-
-1. To start the cluster locally use:
-
-    ```bash
-    make bootstrap-kind
-    ```
-
-    >A kind cluster will be created with applications ready and running.
-
-1. Visit the running applications:
-
-    | Application | URL | Notes |
-    |---|---|---|
-    | ArgoCD | <http://localhost/argocd> |
-    | Grafana | <http://localhost/grafana> | username:admin, password:prom-opertaor |
-    | Prometheus | <http://localhost/prometheus> |
-    | Alertmanager | <http://localhost/alertmanager> |
-
-1. To stop the cluster:
-
-    ```bash
-    make destroy-kind
-    ```
