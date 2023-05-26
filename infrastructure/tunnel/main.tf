@@ -1,12 +1,12 @@
 resource "cloudflare_tunnel" "this" {
   account_id = var.account_id
-  name       = var.name
+  name       = local.full_name
   secret     = var.tunnel_secret
 }
 
 resource "cloudflare_record" "this" {
   zone_id = var.zone_id
-  name    = var.name
+  name    = local.full_name
   value   = "${cloudflare_tunnel.this.id}.cfargotunnel.com"
   type    = "CNAME"
   proxied = true

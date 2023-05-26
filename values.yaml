@@ -22,5 +22,6 @@ cloudflared:
   enable: true
   image:
     tag: 2023.5.1
+  tunnelID: "69c38170-0ed1-42ea-b184-05cd40dced9c"
   ingress:
   - hostname: "k3d-ctd.buildaplatform.io"
