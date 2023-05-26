@@ -18,6 +18,7 @@ spec:
       values: |
         image:
           tag: {{ .Values.cloudflared.image.tag }}
+        tunnelID: {{ .Values.cloudflared.tunnelID }}
         ingress:
         {{- range $ingress := .Values.cloudflared.ingress }}
         - name: {{ $ingress.hostname }}
