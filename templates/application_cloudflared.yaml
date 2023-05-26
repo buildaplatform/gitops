@@ -16,7 +16,14 @@ spec:
     targetRevision: 1.0.2
     helm:
       values: |
-        {{- .Values.cloudflared | toYaml | nindent 8 }}
+        image:
+          tag: {{ .Values.cloudflared.image.tag }}
+        ingress:
+        {{- range $ingress := .Values.cloudflared.ingress }}
+        - name: {{ $ingress.hostname }}
+          service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443
+        {{- end }}
+        - service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443
   syncPolicy:
     automated:
       prune: true

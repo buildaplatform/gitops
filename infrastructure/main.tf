@@ -13,6 +13,6 @@ module "tunnel" {
   account_id   = data.cloudflare_accounts.this.accounts[0].id
   zone_id      = data.cloudflare_zone.this.id
 
-  name          = "k3d-ctd"
+  name          = "k3d-laptop"
   tunnel_secret = var.tunnel_secret
 }

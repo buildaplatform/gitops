@@ -1,4 +1,4 @@
-CLUSTER ?= ctd
+CLUSTER ?= laptop
 
 .PHONY: argocd
 argocd: ## deploy argocd with helm
@@ -15,7 +15,7 @@ start-k3d: ## setup k3d cluster
 	@CLUSTER="${CLUSTER}" ./scripts/setup_k3d.sh
 
 destroy-k3d: ## destroy k3d cluster
-	@k3d cluster delete ctd
+	@k3d cluster delete "${CLUSTER}"
 
 ## --------------------------------------
 ## kind
@@ -28,7 +28,7 @@ start-kind: ## setup kind cluster
 	@CLUSTER="${CLUSTER}" ./scripts/setup_kind.sh
 
 destroy-kind: ## destroy kind cluster
-	@kind delete cluster --name "${KIND_CLUSTER}"
+	@kind delete cluster --name "${CLUSTER}"
 
 ## --------------------------------------
 ## tooling

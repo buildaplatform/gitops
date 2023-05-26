@@ -16,7 +16,20 @@ spec:
     targetRevision: 4.6.1
     helm:
       values: |
-        {{- .Values.ingressnginx | toYaml | nindent 8 }}
+        controller:
+          kind: Deployment
+          service:
+            targetPorts:
+              https: http
+          nodeSelector:
+            ingress-ready: "true"
+          tolerations:
+          - effect: NoSchedule
+            key: node-role.kubernetes.io/master
+            operator: Equal
+          - effect: NoSchedule
+            key: node-role.kubernetes.io/control-plane
+            operator: Equal
   syncPolicy:
     automated:
       prune: true
