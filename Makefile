@@ -4,6 +4,12 @@ CLUSTER ?= laptop
 argocd: ## deploy argocd with helm
 	@helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values ./scripts/values.argocd.yaml > /dev/null
 
+argocd-credentials: ## print the argocd admin credentials
+	@echo "    Username: admin\n    Password: $$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)"
+
+grafana-credentials: ## print the grafana admin credentials
+	@echo "    Username: admin\n    Password: prom-operator"
+
 ## --------------------------------------
 ## k3d
 ## --------------------------------------
@@ -18,17 +24,14 @@ destroy-k3d: ## destroy k3d cluster
 	@k3d cluster delete "${CLUSTER}"
 
 ## --------------------------------------
-## kind
+## terraform
 ## --------------------------------------
 
-bootstrap-kind: ## bootstrap an opinionated kind cluster
-	@./scripts/bootstrap.sh start-kind
+tf-plan: ## plan terraform resources
+	@terraform -chdir=infrastructure plan -var-file terraform.tfvars
 
-start-kind: ## setup kind cluster
-	@CLUSTER="${CLUSTER}" ./scripts/setup_kind.sh
-
-destroy-kind: ## destroy kind cluster
-	@kind delete cluster --name "${CLUSTER}"
+tf-apply: ## apply terraform resources
+	@terraform -chdir=infrastructure apply -var-file terraform.tfvars -auto-approve
 
 ## --------------------------------------
 ## tooling

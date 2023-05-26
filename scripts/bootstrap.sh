@@ -7,7 +7,17 @@ make argocd
 "${DIR}"/wait_for_deployment.sh argocd-server argocd
 kubectl apply -f bootstrap.yaml
 "${DIR}"/wait_for_deployment.sh ingress-nginx-controller ingress-nginx
+"${DIR}"/wait_for_namespace.sh networking
+make tf-apply
 
 echo ""
-echo "Visit http://localhost/argocd 🤟"
+echo "Argo CD"
+echo "    Visit http://localhost/argocd 🐙"
+make argocd-credentials
+echo ""
+
+echo ""
+echo "Grafana"
+echo "    Visit http://localhost/grafana 📈"
+make grafana-credentials
 echo ""
