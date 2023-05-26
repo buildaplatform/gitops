@@ -4,8 +4,11 @@ CLUSTER ?= laptop
 argocd: ## deploy argocd with helm
 	@helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values ./scripts/values.argocd.yaml > /dev/null
 
-argocd-password: ## print the argocd admin password
+argocd-credentials: ## print the argocd admin credentials
 	@echo "    Username: admin\n    Password: $$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)"
+
+grafana-credentials: ## print the grafana admin credentials
+	@echo "    Username: admin\n    Password: prom-operator"
 
 ## --------------------------------------
 ## k3d
@@ -19,6 +22,16 @@ start-k3d: ## setup k3d cluster
 
 destroy-k3d: ## destroy k3d cluster
 	@k3d cluster delete "${CLUSTER}"
+
+## --------------------------------------
+## terraform
+## --------------------------------------
+
+tf-plan: ## plan terraform resources
+	@terraform -chdir=infrastructure plan -var-file terraform.tfvars
+
+tf-apply: ## apply terraform resources
+	@terraform -chdir=infrastructure apply -var-file terraform.tfvars -auto-approve
 
 ## --------------------------------------
 ## kind
