@@ -27,3 +27,19 @@ resource "kubernetes_secret" "this" {
     })
   }
 }
+
+resource "helm_release" "cloudflared" {
+  name = "cloudflared"
+
+  repository = "https://charts.kubito.dev"
+  chart      = "cloudflared"
+  version    = "1.0.2"
+
+  values = [templatefile("${path.module}/values.template.yaml", {
+    ACCOUNT_TAG   = var.account_id,
+    TUNNEL_ID     = cloudflare_tunnel.this.id,
+    TUNNEL_NAME   = cloudflare_tunnel.this.name,
+    TUNNEL_SECRET = var.tunnel_secret,
+    HOSTNAME      = cloudflare_record.this.hostname
+  })]
+}
