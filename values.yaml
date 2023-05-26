@@ -22,6 +22,6 @@ cloudflared:
   enable: true
   image:
     tag: 2023.5.1
-  tunnelID: "69c38170-0ed1-42ea-b184-05cd40dced9c"
+  tunnelID: "5e9a1f62-b5d4-440a-8265-a8d41c755202"
   ingress:
   - hostname: "k3d-laptop.buildaplatform.io"
