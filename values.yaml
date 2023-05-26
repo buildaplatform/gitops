@@ -7,6 +7,9 @@ ingressnginx:
       enable: true
     service:
       type: NodePort
+      nodePorts:
+        http: 30080
+        https: 30443
     config:
       use-forwarded-headers: "true"
     nodeSelector:
@@ -82,11 +85,9 @@ logging:
 
 cloudflared:
   enable: true
-  image:
-    tag: 2023.5.1
   tunnelID: "82cbda74-e016-4326-a4fb-35cfb39bd955"
   existingSecret: "tunnel-credentials"
   ingress:
   - hostname: "k3d-ctd.buildaplatform.io"
-    service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:30617
-  - service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:30617
+    service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443
+  - service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443
