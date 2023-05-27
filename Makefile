@@ -16,16 +16,22 @@ grafana-credentials: ## print the grafana admin credentials
 ## --------------------------------------
 
 bootstrap-k3d: ## bootstrap an opinionated k3d cluster
-	@./scripts/bootstrap.sh start-k3d
+	@./scripts/bootstrap.sh create-k3d
 
-start-k3d: ## setup k3d cluster
+create-k3d: ## create k3d cluster
 	@CLUSTER="${CLUSTER}" ./scripts/setup_k3d.sh
 
+start-k3d: ## start an existing k3d cluster
+	@k3d cluster start "${CLUSTER}"
+
+stop-k3d: ## stop k3d cluster
+	@k3d cluster stop "${CLUSTER}"
+
 destroy-k3d: ## destroy k3d cluster
-	@k3d cluster delete "${CLUSTER}"
 	@if [[ ${CLOUDFLARE} == "true" ]]; then\
 		echo "$$(make tf-destroy)";\
 	fi
+	@k3d cluster delete "${CLUSTER}"
 
 ## --------------------------------------
 ## terraform

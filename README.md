@@ -57,6 +57,12 @@ You may need to also download:
 1. To stop the cluster:
 
     ```bash
+    make stop-k3d
+    ```
+
+1. To permanently delete the cluster:
+
+    ```bash
     make destroy-k3d
     ```
 
@@ -83,6 +89,12 @@ name. The `cloudflared`, DNS records, and Tunnels will be created using Terrafor
     | Alertmanager | https://<mydomain.com>/alertmanager |
 
 1. To stop the cluster:
+
+    ```bash
+    make stop-k3d
+    ```
+
+1. To permanently delete the cluster and Cloudflare infrastructure:
 
     ```bash
     CLOUDFLARE=true make destroy-k3d

@@ -64,6 +64,7 @@ spec:
           prometheusSpec:
             externalUrl: /prometheus
             routePrefix: /prometheus
+            podMonitorSelectorNilUsesHelmValues: false
             serviceMonitorSelectorNilUsesHelmValues: false
             retention: {{ .Values.observability.prometheus.retention }}
             storageSpec:
