@@ -21,6 +21,12 @@ spec:
           service:
             targetPorts:
               https: http
+          metrics:
+            enabled: true
+            serviceMonitor:
+              enabled: true
+              additionalLabels:
+                release: "observability"
           nodeSelector:
             ingress-ready: "true"
           tolerations:
