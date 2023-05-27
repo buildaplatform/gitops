@@ -31,6 +31,7 @@ spec:
             routePrefix: /alertmanager
 
         grafana:
+          defaultDashboardsTimezone: browser
           ingress:
             enabled: {{ .Values.observability.grafana.ingress.enable }}
             annotations:
