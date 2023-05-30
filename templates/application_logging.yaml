@@ -18,6 +18,7 @@ spec:
     chart: loki-stack
     targetRevision: 2.9.10
     helm:
+      releaseName: loki
       values: |
         grafana:
           sidecar:
