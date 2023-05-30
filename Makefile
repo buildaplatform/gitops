@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 CLUSTER ?= laptop
 CLOUDFLARE ?= false # if true it manages cloudflare resources
 
