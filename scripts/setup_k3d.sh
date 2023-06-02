@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-if k3d get kubeconfig "$CLUSTER" ; then
+if k3d kubeconfig get "$CLUSTER" >/dev/null 2>&1 ; then
     echo "Using existing k3d cluster"
 else
     echo "Creating new k3d cluster"

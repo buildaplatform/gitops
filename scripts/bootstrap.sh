@@ -2,8 +2,8 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-make ${1}
-make argocd
+make --no-print-directory ${1}
+make --no-print-directory argocd
 "${DIR}"/wait_for_deployment.sh argocd-server argocd
 kubectl apply -f bootstrap.yaml
 "${DIR}"/wait_for_deployment.sh ingress-nginx-controller ingress-nginx
@@ -11,15 +11,15 @@ kubectl apply -f bootstrap.yaml
 echo ""
 echo "Argo CD"
 echo "    Visit http://localhost/argocd 🐙"
-make argocd-credentials
+make --no-print-directory argocd-credentials
 echo ""
 
 echo ""
 echo "Grafana"
 echo "    Visit http://localhost/grafana 📈"
-make grafana-credentials
+make --no-print-directory grafana-credentials
 echo ""
 
 if [[ ${CLOUDFLARE} == "true" ]]; then
-  make tf-apply
+  make --no-print-directory tf-apply
 fi
