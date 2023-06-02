@@ -31,7 +31,7 @@ stop-k3d: ## stop k3d cluster
 
 destroy-k3d: ## destroy k3d cluster
 	@if [[ ${CLOUDFLARE} == "true" ]]; then\
-		echo "$$(make tf-destroy)";\
+		echo "$$(make --no-print-directory tf-destroy)";\
 	fi
 	@k3d cluster delete "${CLUSTER}"
 
