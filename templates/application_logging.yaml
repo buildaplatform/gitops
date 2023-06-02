@@ -19,9 +19,22 @@ spec:
     targetRevision: 2.9.10
     helm:
       releaseName: loki
-      parameters:
-      - name: grafana.sidecar.datasources.enabled
-        value: "false"
+      values: |
+        grafana:
+          sidecar:
+            datasources:
+              enabled: false
+        promtail:
+          initContainer:
+          - name: init
+            image: docker.io/busybox:1.33
+            imagePullPolicy: IfNotPresent
+            command:
+              - sh
+              - -c
+              - sysctl -w fs.inotify.max_user_instances=256
+            securityContext:
+              privileged: true
   syncPolicy:
     automated:
       selfHeal: true

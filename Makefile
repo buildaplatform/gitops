@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 CLUSTER ?= laptop
 CLOUDFLARE ?= false # if true it manages cloudflare resources
 
@@ -6,10 +8,10 @@ argocd: ## deploy argocd with helm
 	@helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values ./scripts/values.argocd.yaml > /dev/null
 
 argocd-credentials: ## print the argocd admin credentials
-	@echo "    Username: admin\n    Password: $$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)"
+	@echo -e "    Username: admin\n    Password: $$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)"
 
 grafana-credentials: ## print the grafana admin credentials
-	@echo "    Username: admin\n    Password: prom-operator"
+	@echo -e "    Username: admin\n    Password: prom-operator"
 
 ## --------------------------------------
 ## k3d
@@ -29,7 +31,7 @@ stop-k3d: ## stop k3d cluster
 
 destroy-k3d: ## destroy k3d cluster
 	@if [[ ${CLOUDFLARE} == "true" ]]; then\
-		echo "$$(make tf-destroy)";\
+		echo "$$(make --no-print-directory tf-destroy)";\
 	fi
 	@k3d cluster delete "${CLUSTER}"
 
