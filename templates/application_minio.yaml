@@ -27,6 +27,7 @@ spec:
               nginx.ingress.kubernetes.io/rewrite-target: /minio/$2
             ingressClassName: nginx
             path: /minio(/|$)(.*)
+            host: ""
   syncPolicy:
     automated:
       selfHeal: true
