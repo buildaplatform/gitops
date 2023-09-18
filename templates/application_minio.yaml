@@ -1,0 +1,35 @@
+{{- if .Values.minio.enable }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio-operator
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: minio-operator
+  project: default
+  source:
+    repoURL: 'https://operator.min.io'
+    chart: operator
+    targetRevision: 5.0.9
+    helm:
+      releaseName: minio-operator
+      values: |
+        console:
+          ingress:
+            enabled: {{ .Values.minio.ingress.enable }}
+            annotations:
+              nginx.ingress.kubernetes.io/rewrite-target: /minio/$2
+            ingressClassName: nginx
+            path: /minio(/|$)(.*)
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}

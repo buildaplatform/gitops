@@ -17,3 +17,7 @@ observability:
 
 logging:
   enable: true
+
+minio:
+  ingress:
+    enable: true
