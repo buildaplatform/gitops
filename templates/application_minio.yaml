@@ -29,7 +29,7 @@ spec:
           ingress:
             enabled: {{ .Values.minio.ingress.enable }}
             annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /minio/$2
+              nginx.ingress.kubernetes.io/rewrite-target: /$1
             ingressClassName: nginx
             path: /minio(/|$)(.*)
             host: ""
