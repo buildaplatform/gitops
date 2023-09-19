@@ -23,11 +23,8 @@ spec:
         operator:
           env:
           - name: MINIO_BROWSER_REDIRECT_URL
-            value: "http://localhost/minio/"
+            value: "http://localhost/minio"
         console:
-          env:
-          - name: MINIO_BROWSER_REDIRECT_URL
-            value: "http://localhost/minio/"
           ingress:
             enabled: {{ .Values.minio.ingress.enable }}
             annotations:
