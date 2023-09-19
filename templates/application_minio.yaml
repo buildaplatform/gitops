@@ -22,13 +22,15 @@ spec:
       values: |
         operator:
           env:
+          - name: MINIO_CONSOLE_SUBPATH
+            value: "/minio/"
           - name: MINIO_BROWSER_REDIRECT_URL
             value: "http://localhost/minio/"
         console:
           ingress:
             enabled: {{ .Values.minio.ingress.enable }}
             annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /$1
+              nginx.ingress.kubernetes.io/rewrite-target: /minio/$1
             ingressClassName: nginx
             path: /minio/(.*)
             host: ""
