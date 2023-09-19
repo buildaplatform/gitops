@@ -20,11 +20,17 @@ spec:
     helm:
       releaseName: minio-operator
       values: |
+        operator:
+          env:
+          - name: MINIO_BROWSER_REDIRECT_URL
+            value: "http://localhost/minio/"
         console:
           ingress:
             enabled: {{ .Values.minio.ingress.enable }}
+            annotations:
+              nginx.ingress.kubernetes.io/rewrite-target: /$1
             ingressClassName: nginx
-            path: /
+            path: /minio/(.*)
             host: ""
   syncPolicy:
     automated:
