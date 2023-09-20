@@ -1,0 +1,63 @@
+{{- if .Values.databases.postgres.enable }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres-operator
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: postgres-operator
+  project: default
+  source:
+    repoURL: 'https://opensource.zalando.com/postgres-operator/charts/postgres-operator'
+    chart: postgres-operator
+    targetRevision: 1.10.1
+    helm:
+      releaseName: postgres-operator
+      values: |
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres-operator-ui
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: postgres-operator
+  project: default
+  source:
+    repoURL: 'https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui'
+    chart: postgres-operator-ui
+    targetRevision: 1.10.1
+    helm:
+      releaseName: postgres-operator-ui
+      values: |
+        ingress:
+          enabled: {{ .Values.databases.postgres.ingress.enable }}
+          annotations:
+            nginx.ingress.kubernetes.io/rewrite-target: /postgres/$2
+          ingressClassName: nginx
+          hosts:
+          - paths:
+            - /postgres(/|$)(.*)
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}

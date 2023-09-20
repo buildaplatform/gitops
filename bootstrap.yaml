@@ -11,7 +11,7 @@ spec:
   source:
     path: .
     repoURL: https://github.com/markandersontrocme/click-to-deploy
-    targetRevision: HEAD
+    targetRevision: feat/add-pg-operator
   syncPolicy:
     automated:
       selfHeal: true

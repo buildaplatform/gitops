@@ -17,3 +17,9 @@ observability:
 
 logging:
   enable: true
+
+databases:
+  postgres:
+    enable: true
+    ingress:
+      enable: true
