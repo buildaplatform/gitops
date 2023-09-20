@@ -48,8 +48,7 @@ spec:
       releaseName: postgres-operator-ui
       values: |
         envs:
-
-          appUrl: "http://localhost:8081/postgres"
+          appUrl: "http://localhost:8081"
           operatorApiUrl: "http://postgres-operator:8080"
           operatorClusterNameLabel: "cluster-name"
           resourcesVisible: "False"
@@ -58,12 +57,6 @@ spec:
             - "acid"
         ingress:
           enabled: {{ .Values.databases.postgres.ingress.enable }}
-          annotations:
-            nginx.ingress.kubernetes.io/rewrite-target: /postgres/$2
-          ingressClassName: nginx
-          hosts:
-          - paths:
-            - /postgres(/|$)(.*)
   syncPolicy:
     automated:
       selfHeal: true
