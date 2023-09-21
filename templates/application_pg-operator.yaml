@@ -52,17 +52,17 @@ spec:
           operatorApiUrl: "http://postgres-operator:8080"
           operatorClusterNameLabel: "cluster-name"
           resourcesVisible: "False"
-          targetNamespace: "default"
+          targetNamespace: "postgres-clusters"
           teams:
             - "acid"
         ingress:
           enabled: {{ .Values.databases.postgres.ingress.enable }}
           annotations:
-            nginx.ingress.kubernetes.io/rewrite-target: /$2
+            nginx.ingress.kubernetes.io/rewrite-target: /$1
           ingressClassName: nginx
           hosts:
           - paths:
-            - /postgres(/|$)(.*)
+            - /postgres/(.*)
   syncPolicy:
     automated:
       selfHeal: true
