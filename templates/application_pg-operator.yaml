@@ -11,7 +11,7 @@ metadata:
 spec:
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: postgres-operator
+    namespace: postgres
   project: default
   source:
     repoURL: 'https://opensource.zalando.com/postgres-operator/charts/postgres-operator'
@@ -38,7 +38,7 @@ metadata:
 spec:
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: postgres-operator
+    namespace: postgres
   project: default
   source:
     repoURL: 'https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui'
@@ -52,7 +52,7 @@ spec:
           operatorApiUrl: "http://postgres-operator:8080"
           operatorClusterNameLabel: "cluster-name"
           resourcesVisible: "False"
-          targetNamespace: "postgres-clusters"
+          targetNamespace: "postgres"
           teams:
             - "acid"
         ingress:
