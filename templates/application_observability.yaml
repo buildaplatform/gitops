@@ -5,7 +5,7 @@ metadata:
   name: observability
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "10"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -18,7 +18,7 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 45.28.0
     helm:
-      values: |
+      values: |-
         alertmanager:
           ingress:
             enabled: {{ .Values.observability.alertmanager.ingress.enable }}
