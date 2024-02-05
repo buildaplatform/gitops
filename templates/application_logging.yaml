@@ -5,7 +5,7 @@ metadata:
   name: logging
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "10"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -19,7 +19,7 @@ spec:
     targetRevision: 2.9.10
     helm:
       releaseName: loki
-      values: |
+      values: |-
         grafana:
           sidecar:
             datasources:

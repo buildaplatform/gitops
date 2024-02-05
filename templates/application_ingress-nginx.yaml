@@ -15,7 +15,7 @@ spec:
     chart: ingress-nginx
     targetRevision: 4.6.1
     helm:
-      values: |
+      values: |-
         controller:
           kind: Deployment
           service:
@@ -39,5 +39,6 @@ spec:
   syncPolicy:
     automated:
       prune: true
+      selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
