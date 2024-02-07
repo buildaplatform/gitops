@@ -1,0 +1,35 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: buildaplatform-certificate
+  namespace: cert-manager
+spec:
+  isCA: true
+  secretName: buildaplatform-tls-certs
+  dnsNames:
+    - localdev.me
+  subject:
+    organizations:
+      - buildaplatform
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: buildaplatform
+spec:
+  ca:
+    secretName: buildaplatform-tls-certs
