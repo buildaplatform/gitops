@@ -16,7 +16,7 @@ server:
     hosts:
       - argocd.localdev.me
     tls:
-      - secretName: argocd-localdev-me-cert
+      - secretName: argocd-server-tls
         hosts:
           - argocd.localdev.me
     paths:

@@ -30,7 +30,7 @@ spec:
             paths:
             - /
             tls:
-            - secretName: alertmanager-localdev-me-cert
+            - secretName: alertmanager-tls
               hosts:
                 - alertmanager.localdev.me
 
@@ -46,7 +46,7 @@ spec:
             paths:
             - /
             tls:
-            - secretName: grafana-localdev-me-cert
+            - secretName: grafana-tls
               hosts:
                 - grafana.localdev.me
           grafana.ini:
@@ -73,7 +73,7 @@ spec:
             paths:
             - /
             tls:
-            - secretName: prometheus-localdev-me-cert
+            - secretName: prometheus-tls
               hosts:
                 - prometheus.localdev.me
           prometheusSpec:

@@ -2,11 +2,12 @@ SHELL := /bin/bash
 
 CLUSTER ?= laptop
 CLOUDFLARE ?= false # if true it manages cloudflare resources
+ARGOCD_VERSION = 5.55.0
 
 .PHONY: argocd
 argocd: ## deploy argocd with helm
 	@{ \
-		helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values ./scripts/values.argocd.yaml > /dev/null 2>&1; \
+		helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values ./scripts/values.argocd.yaml --version ${ARGOCD_VERSION} > /dev/null 2>&1; \
 	} || { \
 		echo "Failed to deploy ArgoCD" >&2; \
 		exit 1; \
