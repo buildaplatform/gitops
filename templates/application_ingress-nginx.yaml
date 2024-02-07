@@ -20,7 +20,8 @@ spec:
           kind: Deployment
           service:
             targetPorts:
-              https: http
+              https: 443
+              http: 80
           metrics:
             enabled: true
             serviceMonitor:
