@@ -47,9 +47,9 @@ spec:
       releaseName: postgres-operator-ui
       values: |
         envs:
-          operatorClusterNameLabel: "cluster-name"
+          operatorClusterNameLabel: "buildaplatform"
           resourcesVisible: "False"
-          targetNamespace: "postgres"
+          targetNamespace: "*"
           teams:
             - "acid"
         ingress:
@@ -58,7 +58,7 @@ spec:
               cert-manager.io/cluster-issuer: buildaplatform
           ingressClassName: nginx
           hosts:
-          - host: alertmanager.local.buildaplatform.io
+          - host: postgres.local.buildaplatform.io
             paths:
             - /
           tls:
