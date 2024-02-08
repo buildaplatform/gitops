@@ -51,10 +51,10 @@ You may need to also download:
 
     | Application | URL | Notes |
     |---|---|---|
-    | ArgoCD | <https://argocd.localdev.me> | login information: `make argocd-credentials` |
-    | Grafana | <https://grafana.localdev.me> | login information: `make grafana-credentials` |
-    | Prometheus | <https://prometheus.localdev.me> | |
-    | Alertmanager | <https://alertmanager.localdev.me> | |
+    | ArgoCD | <https://argocd.local.buildaplatform.io> | login information: `make argocd-credentials` |
+    | Grafana | <https://grafana.local.buildaplatform.io> | login information: `make grafana-credentials` |
+    | Prometheus | <https://prometheus.local.buildaplatform.io> | |
+    | Alertmanager | <https://alertmanager.local.buildaplatform.io> | |
 
 1. To stop the cluster:
 

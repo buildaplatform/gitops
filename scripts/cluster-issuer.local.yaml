@@ -14,7 +14,7 @@ spec:
   isCA: true
   secretName: buildaplatform-tls-certs
   dnsNames:
-    - localdev.me
+    - local.buildaplatform.io
   subject:
     organizations:
       - buildaplatform

@@ -19,13 +19,13 @@ kubectl apply -f bootstrap.yaml
 
 echo ""
 echo "Argo CD 🐙"
-echo "    Visit https://argocd.localdev.me"
+echo "    Visit https://argocd.local.buildaplatform.io"
 make --no-print-directory argocd-credentials
 echo ""
 
 echo ""
 echo "Grafana 📈"
-echo "    Visit https://grafana.localdev.me"
+echo "    Visit https://grafana.local.buildaplatform.io"
 make --no-print-directory grafana-credentials
 echo ""
 

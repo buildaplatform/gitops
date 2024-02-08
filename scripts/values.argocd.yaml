@@ -14,11 +14,11 @@ server:
       cert-manager.io/cluster-issuer: buildaplatform
     ingressClassName: nginx
     hosts:
-      - argocd.localdev.me
+      - argocd.local.buildaplatform.io
     tls:
       - secretName: argocd-server-tls
         hosts:
-          - argocd.localdev.me
+          - argocd.local.buildaplatform.io
     paths:
       - /
 
