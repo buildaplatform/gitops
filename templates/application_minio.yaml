@@ -51,7 +51,6 @@ spec:
         rootPassword: buildaplatform
         persistence:
           enabled: true
-          existingClaim: local-path-pvc
           storageClass: "local-path"
           accessMode: ReadWriteOnce
           size: 512Mi
