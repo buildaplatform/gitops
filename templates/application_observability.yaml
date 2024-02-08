@@ -23,29 +23,37 @@ spec:
           ingress:
             enabled: {{ .Values.observability.alertmanager.ingress.enable }}
             annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /alertmanager/$2
+              cert-manager.io/cluster-issuer: buildaplatform
             ingressClassName: nginx
+            hosts:
+            - alertmanager.local.buildaplatform.io
             paths:
-            - /alertmanager(/|$)(.*)
-          alertmanagerSpec:
-            routePrefix: /alertmanager
+            - /
+            tls:
+            - secretName: alertmanager-tls
+              hosts:
+                - alertmanager.local.buildaplatform.io
 
         grafana:
           defaultDashboardsTimezone: browser
           ingress:
             enabled: {{ .Values.observability.grafana.ingress.enable }}
             annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /grafana/$2
+              cert-manager.io/cluster-issuer: buildaplatform
             ingressClassName: nginx
-            path: /grafana(/|$)(.*)
+            hosts:
+            - grafana.local.buildaplatform.io
+            paths:
+            - /
+            tls:
+            - secretName: grafana-tls
+              hosts:
+                - grafana.local.buildaplatform.io
           grafana.ini:
             security:
               cookie_secure: false
             server:
-              domain: localhost
-              protocol: http
-              root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
-              serve_from_sub_path: true
+              domain: localdev
           additionalDataSources:
           - name: loki
             type: loki
@@ -58,13 +66,17 @@ spec:
           ingress:
             enabled: {{ .Values.observability.prometheus.ingress.enable }}
             annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /prometheus/$2
+              cert-manager.io/cluster-issuer: buildaplatform
             ingressClassName: nginx
+            hosts:
+            - prometheus.local.buildaplatform.io
             paths:
-            - /prometheus(/|$)(.*)
+            - /
+            tls:
+            - secretName: prometheus-tls
+              hosts:
+                - prometheus.local.buildaplatform.io
           prometheusSpec:
-            externalUrl: /prometheus
-            routePrefix: /prometheus
             podMonitorSelectorNilUsesHelmValues: false
             serviceMonitorSelectorNilUsesHelmValues: false
             retention: {{ .Values.observability.prometheus.retention }}

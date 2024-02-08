@@ -11,16 +11,20 @@ server:
   ingress:
     enabled: true
     annotations:
-      nginx.ingress.kubernetes.io/rewrite-target: /argocd/$2
+      cert-manager.io/cluster-issuer: buildaplatform
     ingressClassName: nginx
+    hosts:
+      - argocd.local.buildaplatform.io
+    tls:
+      - secretName: argocd-server-tls
+        hosts:
+          - argocd.local.buildaplatform.io
     paths:
-    - /argocd(/|$)(.*)
+      - /
 
 configs:
   params:
     "server.insecure": true
-    "server.rootpath": /argocd
-    "server.basehref": /argocd
 
 repoServer:
   autoscaling:
