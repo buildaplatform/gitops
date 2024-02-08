@@ -9,8 +9,6 @@ rm -f ~/.buildaplatform/ssl/rootCA.pem
 # Create directory if it doesn't exist
 mkdir -p $HOME/.buildaplatform/ssl
 
-kubectl apply -f ./scripts/cluster-issuer.local.yaml
-
 echo "Ensuring certificate buildaplatform-certificate is ready... 🕵"
 kubectl wait --for=condition=Ready=true Certificate/buildaplatform-certificate --namespace cert-manager --timeout=5m
 

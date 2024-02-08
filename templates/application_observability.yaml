@@ -26,13 +26,13 @@ spec:
               cert-manager.io/cluster-issuer: buildaplatform
             ingressClassName: nginx
             hosts:
-            - alertmanager.local.buildaplatform.io
+            - alertmanager.{{ .Values.domain }}
             paths:
             - /
             tls:
             - secretName: alertmanager-tls
               hosts:
-                - alertmanager.local.buildaplatform.io
+                - alertmanager.{{ .Values.domain }}
 
         grafana:
           defaultDashboardsTimezone: browser
@@ -42,13 +42,13 @@ spec:
               cert-manager.io/cluster-issuer: buildaplatform
             ingressClassName: nginx
             hosts:
-            - grafana.local.buildaplatform.io
+            - grafana.{{ .Values.domain }}
             paths:
             - /
             tls:
             - secretName: grafana-tls
               hosts:
-                - grafana.local.buildaplatform.io
+                - grafana.{{ .Values.domain }}
           grafana.ini:
             security:
               cookie_secure: false
@@ -69,13 +69,13 @@ spec:
               cert-manager.io/cluster-issuer: buildaplatform
             ingressClassName: nginx
             hosts:
-            - prometheus.local.buildaplatform.io
+            - prometheus.{{ .Values.domain }}
             paths:
             - /
             tls:
             - secretName: prometheus-tls
               hosts:
-                - prometheus.local.buildaplatform.io
+                - prometheus.{{ .Values.domain }}
           prometheusSpec:
             podMonitorSelectorNilUsesHelmValues: false
             serviceMonitorSelectorNilUsesHelmValues: false

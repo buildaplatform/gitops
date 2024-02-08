@@ -1,3 +1,6 @@
+environment: local
+domain: local.buildaplatform.io
+
 # application specific
 observability:
   enable: true
@@ -17,3 +20,9 @@ observability:
 
 logging:
   enable: true
+
+databases:
+  postgres:
+    enable: true
+    ingress:
+      enable: true

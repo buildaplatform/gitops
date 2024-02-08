@@ -9,18 +9,8 @@ server:
     enabled: true
     minReplicas: 2
   ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: buildaplatform
-    ingressClassName: nginx
-    hosts:
-      - argocd.local.buildaplatform.io
-    tls:
-      - secretName: argocd-server-tls
-        hosts:
-          - argocd.local.buildaplatform.io
-    paths:
-      - /
+    # ingress managed in /extra-resources
+    enabled: false
 
 configs:
   params:
