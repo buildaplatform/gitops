@@ -55,7 +55,7 @@ spec:
         ingress:
           enabled: {{ .Values.databases.postgres.ingress.enable }}
           annotations:
-              cert-manager.io/cluster-issuer: buildaplatform
+            cert-manager.io/cluster-issuer: buildaplatform
           ingressClassName: nginx
           hosts:
           - host: postgres.{{ .Values.domain }}

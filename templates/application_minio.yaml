@@ -5,7 +5,7 @@ metadata:
   name: minio-operator
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "10"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -20,20 +20,18 @@ spec:
     helm:
       releaseName: minio-operator
       values: |
-        operator:
-          env:
-          - name: MINIO_SERVER_URL
-            value: http://localhost
-          - name: MINIO_BROWSER_REDIRECT_URL
-            value: "http://localhost/minio/"
         console:
           ingress:
             enabled: {{ .Values.minio.ingress.enable }}
             annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /minio/$1
+              cert-manager.io/cluster-issuer: buildaplatform
             ingressClassName: nginx
-            path: /minio/(.*)
-            host: ""
+            path: /
+            host: minio.{{ .Values.domain }}
+            tls:
+              - secretName: minio-tls
+                hosts:
+                - minio.{{ .Values.domain }}
   syncPolicy:
     automated:
       selfHeal: true
