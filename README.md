@@ -55,6 +55,8 @@ You may need to also download:
     | Grafana | <https://grafana.local.buildaplatform.io> | login information: `make grafana-credentials` |
     | Prometheus | <https://prometheus.local.buildaplatform.io> | |
     | Alertmanager | <https://alertmanager.local.buildaplatform.io> | |
+    | Postrgres | <https://postgres.local.buildaplatform.io> | |
+    | Minio | <https://minio.local.buildaplatform.io> | login information: `make minio-credentials` |
 
 1. To stop the cluster:
 

@@ -19,6 +19,9 @@ argocd-credentials: ## print the argocd admin credentials
 grafana-credentials: ## print the grafana admin credentials
 	@echo -e "    Username: admin\n    Password: prom-operator"
 
+minio-credentials: ## print the minio credentials
+	@echo -e "    JWT: $$(kubectl -n minio-operator get secret console-sa-secret -o jsonpath="{.data.token}" | base64 -d)"
+
 ## --------------------------------------
 ## k3d
 ## --------------------------------------
