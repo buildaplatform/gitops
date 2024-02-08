@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: minio-operator
+  name: minio
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "10"
@@ -11,14 +11,14 @@ metadata:
 spec:
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: minio-operator
+    namespace: minio
   project: default
   source:
     repoURL: 'https://charts.min.io'
     chart: minio
     targetRevision: 5.0.15
     helm:
-      releaseName: minio-operator
+      releaseName: minio
       values: |
         environment:
           MINIO_BROWSER_REDIRECT_URL: https://minio-console.{{ .Values.domain }}
@@ -26,6 +26,7 @@ spec:
           enabled: {{ .Values.minio.ingress.enable }}
           annotations:
             cert-manager.io/cluster-issuer: buildaplatform
+          ingressClassName: nginx
           path: /
           hosts:
             - minio.{{ .Values.domain }}
@@ -37,6 +38,7 @@ spec:
           enabled: {{ .Values.minio.ingress.enable }}
           annotations:
             cert-manager.io/cluster-issuer: buildaplatform
+          ingressClassName: nginx
           path: /
           hosts:
             - minio-console.{{ .Values.domain }}
