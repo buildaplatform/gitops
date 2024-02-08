@@ -26,3 +26,8 @@ databases:
     enable: true
     ingress:
       enable: true
+
+minio:
+  enable: true
+  ingress:
+    enable: true
