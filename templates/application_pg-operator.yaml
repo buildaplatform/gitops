@@ -5,7 +5,7 @@ metadata:
   name: postgres-operator
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "40"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -19,7 +19,6 @@ spec:
     targetRevision: 1.10.1
     helm:
       releaseName: postgres-operator
-      values: |
   syncPolicy:
     automated:
       selfHeal: true
@@ -48,8 +47,6 @@ spec:
       releaseName: postgres-operator-ui
       values: |
         envs:
-          appUrl: "http://localhost:8081"
-          operatorApiUrl: "http://postgres-operator:8080"
           operatorClusterNameLabel: "cluster-name"
           resourcesVisible: "False"
           targetNamespace: "postgres"
@@ -58,11 +55,16 @@ spec:
         ingress:
           enabled: {{ .Values.databases.postgres.ingress.enable }}
           annotations:
-            nginx.ingress.kubernetes.io/rewrite-target: /$2
+              cert-manager.io/cluster-issuer: buildaplatform
           ingressClassName: nginx
           hosts:
-          - paths:
-            - /postgres(/|$)(.*)
+          - host: alertmanager.local.buildaplatform.io
+            paths:
+            - /
+          tls:
+          - secretName: postgres-operator-ui-tls
+            hosts:
+            - postgres.local.buildaplatform.io
   syncPolicy:
     automated:
       selfHeal: true
