@@ -58,13 +58,13 @@ spec:
               cert-manager.io/cluster-issuer: buildaplatform
           ingressClassName: nginx
           hosts:
-          - host: postgres.local.buildaplatform.io
+          - host: postgres.{{ .Values.domain }}
             paths:
             - /
           tls:
           - secretName: postgres-operator-ui-tls
             hosts:
-            - postgres.local.buildaplatform.io
+            - postgres.{{ .Values.domain }}
   syncPolicy:
     automated:
       selfHeal: true
