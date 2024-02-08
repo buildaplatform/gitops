@@ -8,7 +8,6 @@
 - [kube-prometheus-stack](https://github.com/prometheus-operator/kube-prometheus)
 - [loki](https://grafana.com/oss/loki)
 - [tempo](https://grafana.com/oss/tempo)
-- [opentelemetry](https://opentelemetry.io)
 
 ## Getting Started
 
