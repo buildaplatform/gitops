@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: .
-    repoURL: https://github.com/markandersontrocme/click-to-deploy
+    repoURL: https://github.com/buildaplatform/gitops-kubernetes
     targetRevision: HEAD
   syncPolicy:
     automated:
