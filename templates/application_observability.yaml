@@ -5,7 +5,7 @@ metadata:
   name: observability
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "10"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -18,34 +18,42 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 45.28.0
     helm:
-      values: |
+      values: |-
         alertmanager:
           ingress:
             enabled: {{ .Values.observability.alertmanager.ingress.enable }}
             annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /alertmanager/$2
+              cert-manager.io/cluster-issuer: buildaplatform
             ingressClassName: nginx
+            hosts:
+            - alertmanager.{{ .Values.domain }}
             paths:
-            - /alertmanager(/|$)(.*)
-          alertmanagerSpec:
-            routePrefix: /alertmanager
+            - /
+            tls:
+            - secretName: alertmanager-tls
+              hosts:
+                - alertmanager.{{ .Values.domain }}
 
         grafana:
           defaultDashboardsTimezone: browser
           ingress:
             enabled: {{ .Values.observability.grafana.ingress.enable }}
             annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /grafana/$2
+              cert-manager.io/cluster-issuer: buildaplatform
             ingressClassName: nginx
-            path: /grafana(/|$)(.*)
+            hosts:
+            - grafana.{{ .Values.domain }}
+            paths:
+            - /
+            tls:
+            - secretName: grafana-tls
+              hosts:
+                - grafana.{{ .Values.domain }}
           grafana.ini:
             security:
               cookie_secure: false
             server:
-              domain: localhost
-              protocol: http
-              root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
-              serve_from_sub_path: true
+              domain: localdev
           additionalDataSources:
           - name: loki
             type: loki
@@ -58,13 +66,17 @@ spec:
           ingress:
             enabled: {{ .Values.observability.prometheus.ingress.enable }}
             annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /prometheus/$2
+              cert-manager.io/cluster-issuer: buildaplatform
             ingressClassName: nginx
+            hosts:
+            - prometheus.{{ .Values.domain }}
             paths:
-            - /prometheus(/|$)(.*)
+            - /
+            tls:
+            - secretName: prometheus-tls
+              hosts:
+                - prometheus.{{ .Values.domain }}
           prometheusSpec:
-            externalUrl: /prometheus
-            routePrefix: /prometheus
             podMonitorSelectorNilUsesHelmValues: false
             serviceMonitorSelectorNilUsesHelmValues: false
             retention: {{ .Values.observability.prometheus.retention }}

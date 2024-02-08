@@ -5,7 +5,7 @@ metadata:
   name: tempo
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "10"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -24,6 +24,7 @@ spec:
         value: "false"
   syncPolicy:
     automated:
+      prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true

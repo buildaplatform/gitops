@@ -15,12 +15,13 @@ spec:
     chart: ingress-nginx
     targetRevision: 4.6.1
     helm:
-      values: |
+      values: |-
         controller:
           kind: Deployment
           service:
             targetPorts:
-              https: http
+              https: 443
+              http: 80
           metrics:
             enabled: true
             serviceMonitor:
@@ -39,5 +40,6 @@ spec:
   syncPolicy:
     automated:
       prune: true
+      selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true

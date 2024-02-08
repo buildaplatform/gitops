@@ -2,10 +2,16 @@ SHELL := /bin/bash
 
 CLUSTER ?= laptop
 CLOUDFLARE ?= false # if true it manages cloudflare resources
+ARGOCD_VERSION = 5.55.0
 
 .PHONY: argocd
 argocd: ## deploy argocd with helm
-	@helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values ./scripts/values.argocd.yaml > /dev/null
+	@{ \
+		helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values ./scripts/values.argocd.yaml --version ${ARGOCD_VERSION} > /dev/null 2>&1; \
+	} || { \
+		echo "Failed to deploy ArgoCD" >&2; \
+		exit 1; \
+	}
 
 argocd-credentials: ## print the argocd admin credentials
 	@echo -e "    Username: admin\n    Password: $$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)"

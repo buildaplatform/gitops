@@ -4,10 +4,11 @@
 
 - [argocd](https://argo-cd.readthedocs.io/en/stable)
 - [ingress-nginx](https://kubernetes.github.io/ingress-nginx)
+- [cert-manager](https://cert-manager.io)
 - [kube-prometheus-stack](https://github.com/prometheus-operator/kube-prometheus)
 - [loki](https://grafana.com/oss/loki)
 - [tempo](https://grafana.com/oss/tempo)
-- [opentelemetry](https://opentelemetry.io/)
+- [opentelemetry](https://opentelemetry.io)
 
 ## Getting Started
 
@@ -30,6 +31,7 @@ Download these tools:
 - [k3d](https://k3d.io/)
 - [Helm](https://helm.sh/docs/intro/install)
 - [jq](https://stedolan.github.io/jq/download/)
+- [mkcert](https://github.com/FiloSottile/mkcert)
 
 You may need to also download:
 
@@ -49,10 +51,10 @@ You may need to also download:
 
     | Application | URL | Notes |
     |---|---|---|
-    | ArgoCD | <http://localhost/argocd> |
-    | Grafana | <http://localhost/grafana> | username:admin, password:prom-opertaor |
-    | Prometheus | <http://localhost/prometheus> |
-    | Alertmanager | <http://localhost/alertmanager> |
+    | ArgoCD | <https://argocd.local.buildaplatform.io> | login information: `make argocd-credentials` |
+    | Grafana | <https://grafana.local.buildaplatform.io> | login information: `make grafana-credentials` |
+    | Prometheus | <https://prometheus.local.buildaplatform.io> | |
+    | Alertmanager | <https://alertmanager.local.buildaplatform.io> | |
 
 1. To stop the cluster:
 
@@ -79,6 +81,7 @@ name. The `cloudflared`, DNS records, and Tunnels will be created using Terrafor
 
     >A k3d cluster will be created with applications ready and running.
 
+<!-- TODO: Fix theses to be subdomains with cert-manager and external-dns -->
 1. Visit the running applications:
 
     | Application | URL | Notes |

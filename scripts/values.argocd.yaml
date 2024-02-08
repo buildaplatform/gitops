@@ -9,18 +9,12 @@ server:
     enabled: true
     minReplicas: 2
   ingress:
-    enabled: true
-    annotations:
-      nginx.ingress.kubernetes.io/rewrite-target: /argocd/$2
-    ingressClassName: nginx
-    paths:
-    - /argocd(/|$)(.*)
+    # ingress managed in /extra-resources
+    enabled: false
 
 configs:
   params:
     "server.insecure": true
-    "server.rootpath": /argocd
-    "server.basehref": /argocd
 
 repoServer:
   autoscaling:

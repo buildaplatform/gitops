@@ -1,19 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bootstrap
+  name: extra-resources
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "50"
 spec:
   destination:
-    namespace: argocd
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: .
     repoURL: https://github.com/buildaplatform/gitops-kubernetes
+    path: extra-resources
     targetRevision: HEAD
+    helm:
+      parameters:
+        - name: domain
+          value: {{ .Values.domain }}
+        - name: environment
+          value: {{ .Values.environment }}
   syncPolicy:
     automated:
+      prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
