@@ -11,7 +11,7 @@ spec:
   source:
     path: .
     repoURL: https://github.com/buildaplatform/gitops-kubernetes
-    targetRevision: HEAD
+    targetRevision: feat/add-vault
   syncPolicy:
     automated:
       selfHeal: true
