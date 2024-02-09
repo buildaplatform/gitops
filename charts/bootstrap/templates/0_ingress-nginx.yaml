@@ -18,8 +18,8 @@ spec:
       values: |-
         controller:
           hostNetwork: true
-            hostPort:
-              enable: true
+          hostPort:
+            enable: true
           kind: Deployment
           service:
             targetPorts:
