@@ -5,7 +5,7 @@ if [ "$CLUSTER_TYPE" == "k3d" ]; then
         echo "Using existing k3d cluster"
     else
         echo "Creating new k3d cluster"
-        k3d cluster create --config "./cluster-configs/k3d-config.yaml" >/dev/null 2>&1
+        k3d cluster create "$CLUSTER" --config "./cluster-configs/k3d-config.yaml" >/dev/null 2>&1
     fi
 elif [ "$CLUSTER_TYPE" == "kind" ]; then
     if kind export kubeconfig --name "$CLUSTER" >/dev/null 2>&1; then
