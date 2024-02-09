@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: minio-operator
+  name: minio
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "10"
@@ -11,27 +11,71 @@ metadata:
 spec:
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: minio-operator
+    namespace: minio
   project: default
   source:
-    repoURL: 'https://operator.min.io'
-    chart: operator
-    targetRevision: 5.0.9
+    repoURL: 'https://charts.min.io'
+    chart: minio
+    targetRevision: 5.0.15
     helm:
-      releaseName: minio-operator
+      releaseName: minio
       values: |
-        console:
-          ingress:
-            enabled: {{ .Values.minio.ingress.enable }}
-            annotations:
-              cert-manager.io/cluster-issuer: buildaplatform
-            ingressClassName: nginx
-            path: /
-            host: minio.{{ .Values.domain }}
-            tls:
-              - secretName: minio-tls
-                hosts:
+        environment:
+          MINIO_BROWSER_REDIRECT_URL: https://minio-console.{{ .Values.domain }}
+        ingress:
+          enabled: {{ .Values.minio.ingress.enable }}
+          annotations:
+            cert-manager.io/cluster-issuer: buildaplatform
+          ingressClassName: nginx
+          path: /
+          hosts:
+            - minio.{{ .Values.domain }}
+          tls:
+            - secretName: minio-tls
+              hosts:
                 - minio.{{ .Values.domain }}
+        consoleIngress:
+          enabled: {{ .Values.minio.ingress.enable }}
+          annotations:
+            cert-manager.io/cluster-issuer: buildaplatform
+          ingressClassName: nginx
+          path: /
+          hosts:
+            - minio-console.{{ .Values.domain }}
+          tls:
+            - secretName: minio-console-tls
+              hosts:
+                - minio-console.{{ .Values.domain }}
+        replicas: 1
+        rootUser: buildaplatform
+        rootPassword: buildaplatform
+        persistence:
+          enabled: true
+          storageClass: "local-path"
+          accessMode: ReadWriteOnce
+          size: 512Mi
+        resources:
+          requests:
+            memory: 500Mi
+        gateway:
+          replicas: 1
+        mode: standalone
+        buckets:
+        - name: chartmuseum
+          policy: none
+          purge: true
+          versioning: false
+          objectlocking: false
+        - name: argo-artifacts
+          policy: public
+          purge: true
+          versioning: false
+          objectlocking: false
+        - name: vault-backend
+          policy: none
+          purge: true
+          versioning: false
+          objectlocking: false
   syncPolicy:
     automated:
       selfHeal: true
