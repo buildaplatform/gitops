@@ -24,7 +24,7 @@ logging:
 
 # addons specific
 addons:
-  enable: false
+  enable: true
   databases:
     postgres:
       enable: true
