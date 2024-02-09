@@ -22,3 +22,28 @@ spec:
     - hosts:
         - argocd.{{ .Values.domain }}
       secretName: argocd-server-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: buildaplatform
+  name: vault
+  namespace: vault
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: vault.{{ .Values.domain }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: vault
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - vault.{{ .Values.domain }}
+      secretName: vault-tls
