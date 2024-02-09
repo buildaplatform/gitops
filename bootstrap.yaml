@@ -12,6 +12,11 @@ spec:
     path: charts/bootstrap
     repoURL: https://github.com/buildaplatform/gitops
     targetRevision: HEAD
+    helm:
+      values: |-
+        targetRevision: HEAD
+        addons:
+          enable: false
   syncPolicy:
     automated:
       selfHeal: true

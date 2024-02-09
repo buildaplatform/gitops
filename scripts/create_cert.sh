@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # https://skarlso.github.io/2023/10/25/self-signed-locally-trusted-certificates-with-cert-manager/
 
-echo "Setup SSL Certificates... 🔒"
+echo "Setting up SSL Certificates 🔒"
 
 # Remove existing root CA certificate if it exists
-rm -f ~/.buildaplatform/ssl/rootCA.pem
+rm -f ./.ssl/rootCA.pem
 
 # Create directory if it doesn't exist
-mkdir -p $HOME/.buildaplatform/ssl
+mkdir -p ./.ssl
 
-echo "Ensuring certificate buildaplatform-certificate is ready... 🕵"
+echo "Ensuring certificate buildaplatform-certificate is ready 🕵"
 kubectl wait --for=condition=Ready=true Certificate/buildaplatform-certificate --namespace cert-manager --timeout=5m
 
 # Fetch the root CA certificate from Kubernetes secret and decode it
@@ -19,11 +19,11 @@ if [ -z "$kubectl_cert" ]; then
     exit 1
 fi
 
-echo "$kubectl_cert" | base64 -d > $HOME/.buildaplatform/ssl/rootCA.pem
+echo "$kubectl_cert" | base64 -d > ./.ssl/rootCA.pem
 
-echo "Require sudo to setup mkcert... 🔑"
+echo "Require sudo to setup mkcert 🔑"
 # Install the root CA certificate using mkcert
-if ! CAROOT=~/.buildaplatform/ssl mkcert -install; then
+if ! CAROOT=./.ssl mkcert -install; then
     echo "Error: Unable to install root CA certificate using mkcert."
     exit 1
 fi

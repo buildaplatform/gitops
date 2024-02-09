@@ -2,12 +2,11 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-make --no-print-directory ${1}
-"${DIR}"/wait_for_deployment.sh metrics-server kube-system
+make --no-print-directory "${1}"
 make --no-print-directory argocd
 "${DIR}"/wait_for_deployment.sh argocd-server argocd
 
-echo "Bootstraping core Kubernetes applications... 🚜"
+echo "Bootstraping core Kubernetes applications 🚜"
 kubectl apply -f bootstrap.yaml
 
 "${DIR}"/wait_for_deployment.sh ingress-nginx-controller ingress-nginx
