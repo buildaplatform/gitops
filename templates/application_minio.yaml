@@ -47,8 +47,6 @@ spec:
               hosts:
                 - minio-console.{{ .Values.domain }}
         replicas: 1
-        rootUser: buildaplatform
-        rootPassword: buildaplatform
         persistence:
           enabled: true
           storageClass: "local-path"
