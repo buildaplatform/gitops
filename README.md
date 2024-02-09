@@ -1,4 +1,4 @@
-# Click to deploy
+# Gitops
 
 ## What is included
 
@@ -69,7 +69,7 @@ You may need to also download:
     make destroy-k3d
     ```
 
-#### Make it run with Cloudflare Tunnels
+<!-- #### Make it run with Cloudflare Tunnels
 
 Cloudflare Tunnels can be enabled to allow access to your applications via a domain
 name. The `cloudflared`, DNS records, and Tunnels will be created using Terraform.
@@ -82,7 +82,6 @@ name. The `cloudflared`, DNS records, and Tunnels will be created using Terrafor
 
     >A k3d cluster will be created with applications ready and running.
 
-<!-- TODO: Fix theses to be subdomains with cert-manager and external-dns -->
 1. Visit the running applications:
 
     | Application | URL | Notes |
@@ -102,4 +101,4 @@ name. The `cloudflared`, DNS records, and Tunnels will be created using Terrafor
 
     ```bash
     CLOUDFLARE=true make destroy-k3d
-    ```
+    ``` -->

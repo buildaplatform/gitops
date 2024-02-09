@@ -1,6 +1,6 @@
 apiVersion: v2
 name: extra-resources
-description: Bootstrap extra resources for a buildaplatform gitops-kubernetes cluster
+description: Bootstrap extra resources for a buildaplatform gitops cluster
 
 # Application charts are a collection of templates that can be packaged into versioned archives
 # to be deployed.
