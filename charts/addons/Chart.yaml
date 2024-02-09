@@ -1,6 +1,6 @@
 apiVersion: v2
-name: gitops
-description: Bootstrap the needed tools for a Kubernetes cluster
+name: addons
+description: Kubernetes addons
 
 # Application charts are a collection of templates that can be packaged into versioned archives
 # to be deployed.

@@ -46,16 +46,16 @@ destroy-k3d: ## destroy k3d cluster
 ## --------------------------------------
 
 tf-init: ## init terraform locally
-	@terraform -chdir=infrastructure init
+	@terraform -chdir=terraform init
 
 tf-plan: tf-init ## plan terraform resources
-	@terraform -chdir=infrastructure plan -var-file terraform.tfvars
+	@terraform -chdir=terraform plan -var-file terraform.tfvars
 
 tf-apply: tf-init ## apply terraform resources
-	@terraform -chdir=infrastructure apply -var-file terraform.tfvars -auto-approve
+	@terraform -chdir=terraform apply -var-file terraform.tfvars -auto-approve
 
 tf-destroy: tf-init ## destroy terraform resources
-	@terraform -chdir=infrastructure apply -destroy -var-file terraform.tfvars -auto-approve
+	@terraform -chdir=terraform apply -destroy -var-file terraform.tfvars -auto-approve
 
 ## --------------------------------------
 ## tooling

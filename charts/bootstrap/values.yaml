@@ -1,7 +1,8 @@
 environment: local
 domain: local.buildaplatform.io
+targetRevision: HEAD
 
-# application specific
+# bootstrap specific
 observability:
   enable: true
   alertmanager:
@@ -21,13 +22,15 @@ observability:
 logging:
   enable: true
 
-databases:
-  postgres:
+# addons specific
+addons:
+  enable: true
+  databases:
+    postgres:
+      enable: true
+      ingress:
+        enable: true
+  minio:
     enable: true
     ingress:
       enable: true
-
-minio:
-  enable: true
-  ingress:
-    enable: true

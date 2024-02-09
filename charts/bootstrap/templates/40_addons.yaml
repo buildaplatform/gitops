@@ -1,7 +1,8 @@
+{{- if .Values.addons.enable }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: extra-resources
+  name: addons
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "50"
@@ -11,17 +12,18 @@ spec:
   project: default
   source:
     repoURL: https://github.com/buildaplatform/gitops
-    path: extra-resources
-    targetRevision: HEAD
+    path: charts/addons
+    targetRevision: {{ .Values.targetRevision }}
     helm:
-      parameters:
-        - name: domain
-          value: {{ .Values.domain }}
-        - name: environment
-          value: {{ .Values.environment }}
+      values: |-
+        domain: {{ .Values.domain }}
+        environment: {{ .Values.environment }}
+
+        {{- toYaml .Values.addons | nindent 8 }}
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+{{- end }}
