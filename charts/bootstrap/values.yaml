@@ -1,8 +1,8 @@
 environment: local
 domain: local.buildaplatform.io
-targetRevision: chore/reorganize-repo-structure
+targetRevision: HEAD
 
-# application specific
+# bootstrap specific
 observability:
   enable: true
   alertmanager:

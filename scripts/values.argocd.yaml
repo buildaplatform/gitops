@@ -9,7 +9,7 @@ server:
     enabled: true
     minReplicas: 2
   ingress:
-    # ingress managed in /extra-resources
+    # ingress managed in /charts/bootstrap-extra-resources
     enabled: false
 
 configs:

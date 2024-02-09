@@ -11,7 +11,7 @@ spec:
   source:
     path: charts/bootstrap
     repoURL: https://github.com/buildaplatform/gitops
-    targetRevision: chore/reorganize-repo-structure
+    targetRevision: HEAD
   syncPolicy:
     automated:
       selfHeal: true
