@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-CLUSTER ?= laptop
+CLUSTER ?= buildaplatform
 CLOUDFLARE ?= false # if true it manages cloudflare resources
 ARGOCD_VERSION = 5.55.0
 
@@ -27,7 +27,7 @@ bootstrap-k3d: ## bootstrap an opinionated k3d cluster
 	@./scripts/bootstrap.sh create-k3d
 
 create-k3d: ## create k3d cluster
-	@CLUSTER="${CLUSTER}" ./scripts/setup_k3d.sh
+	@CLUSTER="${CLUSTER}" CLUSTER_TYPE=k3d ./scripts/setup_cluster.sh
 
 start-k3d: ## start an existing k3d cluster
 	@k3d cluster start "${CLUSTER}"
@@ -36,6 +36,22 @@ stop-k3d: ## stop k3d cluster
 	@k3d cluster stop "${CLUSTER}"
 
 destroy-k3d: ## destroy k3d cluster
+	@if [[ ${CLOUDFLARE} == "true" ]]; then\
+		echo "$$(make --no-print-directory tf-destroy)";\
+	fi
+	@k3d cluster delete "${CLUSTER}"
+
+## --------------------------------------
+## kind
+## --------------------------------------
+
+bootstrap-kind: ## bootstrap an opinionated kind cluster
+	@./scripts/bootstrap.sh create-kind
+
+create-kind: ## create kind cluster
+	@CLUSTER="${CLUSTER}" CLUSTER_TYPE=kind ./scripts/setup_cluster.sh
+
+destroy-kind: ## destroy kind cluster
 	@if [[ ${CLOUDFLARE} == "true" ]]; then\
 		echo "$$(make --no-print-directory tf-destroy)";\
 	fi
