@@ -55,7 +55,7 @@ You may need to also download:
     | Prometheus | <https://prometheus.local.buildaplatform.io> | |
     | Alertmanager | <https://alertmanager.local.buildaplatform.io> | |
     | Postrgres | <https://postgres.local.buildaplatform.io> | |
-    | Minio | <https://minio.local.buildaplatform.io> | login information: `make minio-credentials` |
+    | Minio Console | <https://minio-console.local.buildaplatform.io> | Username: `buildaplatform` Password: `buildaplatform` |
 
 1. To stop the cluster:
 
