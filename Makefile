@@ -55,7 +55,7 @@ destroy-kind: ## destroy kind cluster
 	@if [[ ${CLOUDFLARE} == "true" ]]; then\
 		echo "$$(make --no-print-directory tf-destroy)";\
 	fi
-	@k3d cluster delete "${CLUSTER}"
+	@kind delete cluster --name "${CLUSTER}"
 
 ## --------------------------------------
 ## terraform

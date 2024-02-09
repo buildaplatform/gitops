@@ -3,7 +3,6 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 make --no-print-directory ${1}
-sleep 60s
 make --no-print-directory argocd
 "${DIR}"/wait_for_deployment.sh argocd-server argocd
 
