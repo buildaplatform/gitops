@@ -17,14 +17,11 @@ spec:
     helm:
       values: |-
         controller:
+          watchIngressWithoutClass: true
           hostNetwork: true
           hostPort:
             enable: true
           kind: Deployment
-          service:
-            targetPorts:
-              https: 443
-              http: 80
           metrics:
             enabled: true
             serviceMonitor:
