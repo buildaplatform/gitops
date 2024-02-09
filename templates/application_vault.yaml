@@ -14,7 +14,7 @@ spec:
       values: |-
         server:
           enabled: true
-          ha:
+          standalone:
             enabled: true
             config: |
               ui = true
@@ -32,7 +32,6 @@ spec:
                 disable_ssl = "true"
                 s3_force_path_style = true
               }
-              service_registration "kubernetes" {}
           ingress:
             enabled: true
             hosts:
