@@ -13,6 +13,7 @@ spec:
     helm:
       values: |-
         standalone:
+          enabled: true
           config: |
             ui = true
             listener "tcp" {
@@ -39,11 +40,11 @@ spec:
               - secretName: vault-tls
                 hosts:
                   - vault.{{ .Values.domain }}
-          ui:
-            enabled: true
-            serviceType: "ClusterIP"
-            serviceNodePort: null
-            externalPort: 8200
+        ui:
+          enabled: true
+          serviceType: "ClusterIP"
+          serviceNodePort: null
+          externalPort: 8200
     chart: vault
   destination:
     server: https://kubernetes.default.svc
